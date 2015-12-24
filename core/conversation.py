@@ -30,7 +30,8 @@ class Conversation():
 
 			if result:
 				print "Start listening command"
-				tts.speak(apppath.get_resources('yes.mp3'))
+				#tts.speak(apppath.get_resources('yes.mp3'))
+				tts.speak(apppath.get_resources('yes.wav'))
 				commands = self.mic.activeListen()
 				print "Stop listening command"
 				if commands:

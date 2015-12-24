@@ -1,16 +1,16 @@
 # coding: utf-8
-#import RPIO  			#https://pythonhosted.org/RPIO/
+import RPi.GPIO as GPIO
 import light
 from core import tts
 
-LIGHT_SENSOR = 15
+LIGHT_SENSOR = 22
 
-# RPIO.setmode(RPIO.BOARD)
-# RPIO.setup(LIGHT_SENSOR, RPIO.IN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LIGHT_SENSOR, GPIO.IN)
 
 def handle(mic, command):
-	#isLight = RPIO.input(LIGHT_SENSOR)
-	isLight = True
+	isLight = GPIO.input(LIGHT_SENSOR)
+	#isLight = True
 	if isLight:
 		tts.espeak_tts("Phòng sáng")
 		while True:

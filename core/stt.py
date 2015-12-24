@@ -12,7 +12,7 @@ def _regenerate_request_url():
 	query = urllib.urlencode({'output': 'json',
 							'client': 'chromium',
 							'lang': 'vi',
-							'key': 'AIzaSyARC6Vdp5i_A4d9g_5hiLydjr2jbjCmf2s',
+							'key': 'AIzaSyDA_NpkLWTkCaVIIho8u8FTjlF-WdJQu_E',
 							'maxresults': 6,
 							'pfilter': 2})
 	

@@ -64,6 +64,7 @@ class Mic():
         if not isDetected:
             stream.stop_stream()
             stream.close()
+            print "Cannot detected"
             return None
 
         # get data 1s before speech to detect
@@ -86,11 +87,13 @@ class Mic():
             f.seek(0)
 
             transcripts = stt.gg_transale(f)
-
+        stream.stop_stream()
+        stream.close()
+        print transcripts
         if transcripts:
             if any(keyword == pharse for pharse in transcripts):
                 return THRESHOLD
-
+        
         return None
 
     def activeListen(self):
@@ -108,7 +111,8 @@ class Mic():
         for i in range(0, RATE / CHUNK * LISTEN_TIME):
             data = stream.read(CHUNK)
             frames.append(data)
-
+        stream.stop_stream()
+        stream.close()
         tts.speak(apppath.get_resources('beep.wav'))
 
         with tempfile.SpooledTemporaryFile(mode='w+b') as f:
@@ -119,5 +123,6 @@ class Mic():
             wav_fp.writeframes(''.join(frames))
             wav_fp.close()
             f.seek(0)
-
+            
             return stt.gg_transale(f)            
+        

@@ -1,22 +1,22 @@
 # coding: utf-8
-#import RPIO 		  #https://pythonhosted.org/RPIO/
+import RPi.GPIO as GPIO 		  #https://pythonhosted.org/GPIO/
 from core import tts
 
-LIGHT_ONE = 11
-LIGHT_TWO = 13
+LIGHT_ONE = 17
+LIGHT_TWO = 27
 
-# RPIO.setmode(RPIO.BOARD)
-# RPIO.setup(LIGHT_ONE, RPIO.OUT, initial=RPIO.HIGH)
-# RPIO.setup(LIGHT_TWO, RPIO.OUT, initial=RPIO.HIGH)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LIGHT_ONE, GPIO.OUT, initial=GPIO.HIGH)
+GPIO.setup(LIGHT_TWO, GPIO.OUT, initial=GPIO.HIGH)
 
 def handle(mic, command):
 	if command == u"BẬT ĐÈN":
-		# RPIO.output(LIGHT_ONE, RPIO.LOW)
-		# RPIO.output(LIGHT_TWO, RPIO.LOW)
+		GPIO.output(LIGHT_ONE, GPIO.LOW)
+		GPIO.output(LIGHT_TWO, GPIO.LOW)
 		tts.espeak_tts("Đã bật đèn")
 	elif command == u"TẮT ĐÈN":
-		# RPIO.output(LIGHT_ONE, RPIO.HIGH)
-		# RPIO.output(LIGHT_TWO, RPIO.HIGH)
+		GPIO.output(LIGHT_ONE, GPIO.HIGH)
+		GPIO.output(LIGHT_TWO, GPIO.HIGH)
 		tts.espeak_tts("Đã tắt đèn")
 
 def isMatch(command):
