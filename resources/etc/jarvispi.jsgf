@@ -1,0 +1,9 @@
+#JSGF V1.0;
+
+/**
+ * JSGF Grammar for Turtle example
+ */
+
+grammar jarvispi;
+public <jarvispi> = <control>
+<control>= ( bi | baajt ddefn | tawst ddefn | thowfi tieest | thowfi gian | tin tuwsc mowsi | trajng thasi asnh sasng | trajng thasi vaajn hafnh | cos | khoong )

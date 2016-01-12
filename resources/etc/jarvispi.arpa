@@ -1,0 +1,215 @@
+#############################################################################
+## Copyright (c) 1996, Carnegie Mellon University, Cambridge University,
+## Ronald Rosenfeld and Philip Clarkson
+## Version 3, Copyright (c) 2006, Carnegie Mellon University 
+## Contributors includes Wen Xu, Ananlada Chotimongkol, 
+## David Huggins-Daines, Arthur Chan and Alan Black 
+#############################################################################
+=============================================================================
+===============  This file was produced by the CMU-Cambridge  ===============
+===============     Statistical Language Modeling Toolkit     ===============
+=============================================================================
+This is a 3-gram language model, based on a vocabulary of 34 words,
+  which begins "</s>", "<s>", "asnh"...
+This is a CLOSED-vocabulary model
+  (OOVs eliminated from training data and are forbidden in test data)
+Good-Turing discounting was applied.
+1-gram frequency of frequency : 20 
+2-gram frequency of frequency : 40 8 1 1 0 0 0 
+3-gram frequency of frequency : 59 8 1 1 0 0 0 
+1-gram discounting ratios : 0.91 
+2-gram discounting ratios : 0.35 0.12 
+3-gram discounting ratios : 0.23 0.14 
+This file is in the ARPA-standard format introduced by Doug Paul.
+
+p(wd3|wd1,wd2)= if(trigram exists)           p_3(wd1,wd2,wd3)
+                else if(bigram w1,w2 exists) bo_wt_2(w1,w2)*p(wd3|wd2)
+                else                         p(wd3|w2)
+
+p(wd2|wd1)= if(bigram exists) p_2(wd1,wd2)
+            else              bo_wt_1(wd1)*p_1(wd2)
+
+All probs and back-off weights (bo_wt) are given in log10 form.
+
+Data formats:
+
+Beginning of data mark: \data\
+ngram 1=nr            # number of 1-grams
+ngram 2=nr            # number of 2-grams
+ngram 3=nr            # number of 3-grams
+
+\1-grams:
+p_1     wd_1 bo_wt_1
+\2-grams:
+p_2     wd_1 wd_2 bo_wt_2
+\3-grams:
+p_3     wd_1 wd_2 wd_3 
+
+end of data mark: \end\
+
+\data\
+ngram 1=34
+ngram 2=51
+ngram 3=69
+
+\1-grams:
+-0.6351 </s>	-1.1796
+-0.6128 <s>	-0.2144
+-1.9552 asnh	-0.1831
+-1.9552 baajt	-0.1773
+-1.4367 bajt	-0.1550
+-1.9552 bi	-0.0735
+-1.9552 camera	-0.1831
+-1.9552 coorng	0.0000
+-1.9552 cos	-0.0735
+-1.6128 ddefn	0.0582
+-1.9552 gian	-0.0735
+-1.9552 hafnh	-0.0735
+-1.9552 hooj	-0.1831
+-1.9552 hooji	-0.0735
+-1.9552 khoong	-0.0735
+-1.6128 lajnh	0.0582
+-1.9552 majng	-0.1831
+-1.6128 masy	-0.0456
+-1.6128 nhajc	0.0582
+-1.9552 nhawc	-0.1831
+-1.9552 nhowr	-0.0735
+-1.6128 quajt	0.0582
+-1.9552 sasng	-0.0735
+-1.3118 tawst	-0.1434
+-1.6128 thasi	-0.1783
+-1.6128 thowfi	-0.1783
+-1.9552 thuw	-0.0735
+-1.9552 tieest	-0.0735
+-1.9552 tin	-0.1831
+-1.6128 trajng	-0.0456
+-1.9552 truowc	0.0000
+-1.9552 tuwsc	-0.0735
+-1.9552 vaajn	-0.1831
+-1.9552 xax	-0.1831
+
+\2-grams:
+-0.0223 </s> <s> 0.0162
+-1.7553 <s> baajt 0.0733
+-0.8239 <s> bajt 0.0733
+-1.7553 <s> bi 0.0733
+-1.7553 <s> camera 0.0733
+-1.7553 <s> cos 0.0733
+-1.7553 <s> hooj 0.0733
+-1.7553 <s> khoong 0.0733
+-1.7553 <s> majng 0.0733
+-1.7553 <s> nhawc 0.0733
+-0.6990 <s> tawst 0.0733
+-1.9150 <s> thowfi 0.0733
+-1.7553 <s> tin 0.0733
+-1.9150 <s> trajng -0.0112
+-0.4543 asnh sasng 0.0733
+-0.4543 baajt ddefn -0.0584
+-0.9314 bajt masy -0.0584
+-0.9314 bajt nhajc -0.0584
+-0.9314 bajt quajt -0.0584
+-0.4543 bi </s> 1.1863
+-0.4543 camera truowc -0.1099
+-0.4543 cos </s> 1.1863
+-0.9150 ddefn </s> 1.2335
+-0.4543 gian </s> 1.1863
+-0.4543 hafnh </s> 1.1863
+-0.4543 hooj thuw 0.0733
+-0.4543 hooji </s> 1.1863
+-0.4543 khoong </s> 1.1863
+-0.9150 lajnh </s> 1.2335
+-0.4543 majng xax 0.0733
+-0.9150 masy lajnh -0.0112
+-0.9150 nhajc </s> 1.2335
+-0.4543 nhawc nhowr 0.0733
+-0.4543 nhowr </s> 1.1863
+-0.9150 quajt </s> 1.2335
+-0.4543 sasng </s> 1.1863
+-1.0563 tawst ddefn -0.0584
+-1.0563 tawst masy -0.0584
+-1.0563 tawst nhajc -0.0584
+-1.0563 tawst quajt -0.0584
+-0.7553 thasi asnh 0.0733
+-0.7553 thasi vaajn 0.0733
+-0.7553 thowfi gian 0.0733
+-0.7553 thowfi tieest 0.0733
+-0.4543 thuw </s> 1.1863
+-0.4543 tieest </s> 1.1863
+-0.4543 tin tuwsc 0.0733
+-0.9150 trajng thasi 0.0733
+-0.4543 tuwsc </s> 1.1863
+-0.4543 vaajn hafnh 0.0733
+-0.4543 xax hooji 0.0733
+
+\3-grams:
+-1.9130 </s> <s> baajt 
+-0.8016 </s> <s> bajt 
+-1.9130 </s> <s> camera 
+-1.9130 </s> <s> cos 
+-1.9130 </s> <s> hooj 
+-1.9130 </s> <s> khoong 
+-1.9130 </s> <s> majng 
+-1.9130 </s> <s> nhawc 
+-0.6767 </s> <s> tawst 
+-1.8194 </s> <s> thowfi 
+-1.9130 </s> <s> tin 
+-1.8194 </s> <s> trajng 
+-0.6342 <s> baajt ddefn 
+-1.1114 <s> bajt masy 
+-1.1114 <s> bajt nhajc 
+-1.1114 <s> bajt quajt 
+-0.6342 <s> bi </s> 
+-0.6342 <s> camera truowc 
+-0.6342 <s> cos </s> 
+-0.6342 <s> hooj thuw 
+-0.6342 <s> khoong </s> 
+-0.6342 <s> majng xax 
+-0.6342 <s> nhawc nhowr 
+-1.2363 <s> tawst ddefn 
+-1.2363 <s> tawst masy 
+-1.2363 <s> tawst nhajc 
+-1.2363 <s> tawst quajt 
+-0.9353 <s> thowfi gian 
+-0.9353 <s> thowfi tieest 
+-0.6342 <s> tin tuwsc 
+-0.8417 <s> trajng thasi 
+-0.6342 asnh sasng </s> 
+-0.6342 baajt ddefn </s> 
+-0.6342 bajt masy lajnh 
+-0.6342 bajt nhajc </s> 
+-0.6342 bajt quajt </s> 
+-0.6342 bi </s> <s> 
+-0.6342 camera truowc coorng 
+-0.6342 cos </s> <s> 
+-0.8417 ddefn </s> <s> 
+-0.6342 gian </s> <s> 
+-0.6342 hafnh </s> <s> 
+-0.6342 hooj thuw </s> 
+-0.6342 hooji </s> <s> 
+-0.6342 khoong </s> <s> 
+-0.8417 lajnh </s> <s> 
+-0.6342 majng xax hooji 
+-0.8417 masy lajnh </s> 
+-0.8417 nhajc </s> <s> 
+-0.6342 nhawc nhowr </s> 
+-0.6342 nhowr </s> <s> 
+-0.8417 quajt </s> <s> 
+-0.6342 sasng </s> <s> 
+-0.6342 tawst ddefn </s> 
+-0.6342 tawst masy lajnh 
+-0.6342 tawst nhajc </s> 
+-0.6342 tawst quajt </s> 
+-0.6342 thasi asnh sasng 
+-0.6342 thasi vaajn hafnh 
+-0.6342 thowfi gian </s> 
+-0.6342 thowfi tieest </s> 
+-0.6342 thuw </s> <s> 
+-0.6342 tieest </s> <s> 
+-0.6342 tin tuwsc </s> 
+-0.9353 trajng thasi asnh 
+-0.9353 trajng thasi vaajn 
+-0.6342 tuwsc </s> <s> 
+-0.6342 vaajn hafnh </s> 
+-0.6342 xax hooji </s> 
+
+\end\
