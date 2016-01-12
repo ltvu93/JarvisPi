@@ -14,16 +14,17 @@ class Conversation():
 		self.profile = profile
 		self.mic = Mic()
 		self.brain = Brain(self.mic)
-		self.notifier = Notifier()
+		#self.notifier = Notifier()
 
 	def handleForever(self):
 		"""Handle interact bettwen user and JarvisPi."""
 
 		while True:
+                        '''
 			notifications = self.notifier.getAllNotifications()
 			for notif in notifications:
 				print str(notif)
-
+                        '''
 			print "Start listening keyword '%s'" % self.nickname
 			result = self.mic.passiveListen(self.nickname)
 			print "Stop listening keyword '%s'" % self.nickname

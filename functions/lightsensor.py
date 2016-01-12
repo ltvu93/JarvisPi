@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LIGHT_SENSOR, GPIO.IN)
 
 def handle(mic, command):
-	isLight = GPIO.input(LIGHT_SENSOR)
+	isLight = not GPIO.input(LIGHT_SENSOR)
 	#isLight = True
 	if isLight:
 		tts.espeak_tts("Phòng sáng")
