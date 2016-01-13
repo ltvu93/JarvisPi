@@ -105,7 +105,7 @@ class Mic():
                                 input=True,
                                 frames_per_buffer=CHUNK)
 
-        LISTEN_TIME = 4
+        LISTEN_TIME = 3
         frames = []
 
         for i in range(0, RATE / CHUNK * LISTEN_TIME):
@@ -124,5 +124,7 @@ class Mic():
             wav_fp.close()
             f.seek(0)
             
-            return self.stt.get_value(f)            
+            transcripts = self.stt.get_value(f)
+            print transcripts
+            return transcripts
         

@@ -11,7 +11,7 @@ def espeak_tts(phrase):
         with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as f:
             fname = f.name
         cmd = ['espeak', '-v', 'vi+m2',
-                         '-s', '100',
+                         '-s', '85',
                          '-w', fname,
                          phrase]
         cmd = [str(x) for x in cmd]

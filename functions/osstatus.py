@@ -3,6 +3,7 @@ import re
 import psutil     #https://pypi.python.org/pypi/psutil
 import platform
 import datetime
+import time
 
 from core import tts
 
@@ -13,7 +14,7 @@ def handle(mic, comamnd):
 	cpu_percent = psutil.cpu_percent()
 	memory_percent = psutil.virtual_memory()[2]
 	disk_percent = psutil.disk_usage('/')[3]
-	
+	'''
 	response = "Tôi đang chạy hệ điều hành %s phiên bản %s.  " %(os, version)
 	response += "Hệ thống tên %s và có CPU %s nhân.   " %(name, cores)
 	response += "CPU hiện tại được sử dụng %s phần trăm.  " %cpu_percent
@@ -21,12 +22,15 @@ def handle(mic, comamnd):
 	response += "Ổ cứng hiện tại được sử dụng %s phần trăm." %disk_percent
 	'''
 	tts.espeak_tts("Tôi đang chạy hệ điều hành %s phiên bản %s.  " %(os, version))
+	time.sleep(0.5)
 	tts.espeak_tts("Hệ thống tên %s và có CPU %s nhân.   " %(name, cores))
+	time.sleep(0.5)
 	tts.espeak_tts("CPU hiện tại được sử dụng %s phần trăm.  " %cpu_percent)
-	tts.espeak_tts("Bộ nhớ hiện tại được sử dụng %s phần trăm." %memory_percent)
-	tts.espeak_tts("Ổ cứng hiện tại được sử dụng %s phần trăm." %disk_percent)
-	'''
-	tts.espeak_tts(response)
+	time.sleep(0.5)
+	tts.espeak_tts("Bộ nhớ hiện tại được sử dụng %s phần trăm.   " %memory_percent)
+	time.sleep(0.5)
+	tts.espeak_tts("Ổ cứng hiện tại được sử dụng %s phần trăm.    " %disk_percent)
+	#tts.espeak_tts(response)
 
 def isMatch(command):
     #return command == u"MÀY SAO RỒI"

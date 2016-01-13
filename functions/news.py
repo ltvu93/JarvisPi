@@ -8,10 +8,15 @@ def getTruePostSummary(summary):
 	return summary[index+4:]
 
 def handle(mic, comamnd):
-	url = 'http://vnexpress.net/rss/tin-moi-nhat.rss'
-	data = feedparser.parse(url)
+	try:
+		url = 'http://vnexpress.net/rss/tin-moi-nhat.rss'
+		data = feedparser.parse(url)	
 
-	rssTitle = data['feed']['title'].encode('utf-8')
+		rssTitle = data['feed']['title'].encode('utf-8')
+	except:
+		tts.espeak_tts("Kết nối mạng có vấn đề.      ")
+		tts.espeak_tts("Vui lòng thử lại.      ")
+		return
 	tts.espeak_tts(rssTitle)
 
 	for post in data.entries:
@@ -25,9 +30,13 @@ def handle(mic, comamnd):
 			tts.espeak_tts("Bạn có muốn tiếp tục hay không")
 			commands = mic.activeListen()
 			if commands:
-				if any(command == u"CÓ" or command == "COS" for command in commands):
+				if any(command == u"CÓ" for command in commands):
 					break
-				elif any(command == u"KHÔNG" or command == "KHOONG" for command in commands):
+				elif any(command == "COS" for command in commands):
+					break
+				elif any(command == u"KHÔNG" for command in commands):
+					return
+				elif any(command == u"KHOONG" for command in commands):
 					return
 
 		tts.espeak_tts("Kết thúc đọc tin tức")

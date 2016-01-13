@@ -92,10 +92,10 @@ class PocketSphinxSTT(STT):
 	   	#     print e
 	   	# 	exit()
                 result = []    
-                fp.seek(44)
+#                fp.seek(44)
                 data = fp.read()
                 decoder.start_utt()
-                decoder.process_raw(data, False, True)
+                decoder.process_raw(data, False, False)
                 decoder.end_utt()
                 hyp = decoder.hyp()
                 try:

@@ -86,4 +86,4 @@ def handle(mic, comamnd):
 		tts.espeak_tts(response)
 
 def isMatch(command):
-	return bool(re.search(r"\bGMAIL\b", command, re.IGNORECASE))
+	return bool(re.search(r"\bGMAIL\b", command, re.IGNORECASE)) or bool(re.search(r"\bHOOPJ THUW\b", command, re.IGNORECASE))

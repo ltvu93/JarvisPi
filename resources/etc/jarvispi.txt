@@ -17,4 +17,10 @@
 <s> tawst masy lajnh </s>
 <s> majng xax hooji </s>
 <s> nhawc nhowr </s>
-<s> camera truowc coorng <s>
+<s> camera truowc coorng </s>
+<s> camera sau </s>
+<s> sajc ddieejn thoaji </s>
+<s> giarm ddooj sasng ddefn </s>
+<s> tawng ddooj sasng ddefn </s>
+<s> tawng nhieejt ddooj </s>
+<s> giarm nhieejt ddooj </s>
