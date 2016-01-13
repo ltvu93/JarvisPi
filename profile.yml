@@ -7,4 +7,4 @@ openweathermap:
 gg_stt:
     key: AIzaSyARC6Vdp5i_A4d9g_5hiLydjr2jbjCmf2s
 stt:
-	name: pocketsphinx
+    name: pocketsphinx

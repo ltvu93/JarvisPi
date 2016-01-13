@@ -5,7 +5,6 @@ import wave       # save file audio
 import audioop    # interact with raw data audio, get RMS
 
 import apppath
-import stt
 import tts
 
 # Microphone stream config.
@@ -87,7 +86,7 @@ class Mic():
             wav_fp.close()
             f.seek(0)
 
-            transcripts = stt.get_value(f)
+            transcripts = self.stt.get_value(f)
         stream.stop_stream()
         stream.close()
         print transcripts
@@ -125,5 +124,5 @@ class Mic():
             wav_fp.close()
             f.seek(0)
             
-            return stt.get_value(f)            
+            return self.stt.get_value(f)            
         

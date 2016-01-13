@@ -5,22 +5,24 @@ import requests
 import urllib
 import urlparse
 import json
+import apppath
 
 import wave
 from pocketsphinx import *
 
-hmdir = "../resources/model_parameters/jarvispi.cd_cont_200"
-lmd   = "../resources/etc/jarvispi.lm.DMP"
-dictd = "../resources/etc/jarvispi.dic"
+hmdir = apppath.RESOURCES_PATH + "/model_parameters/jarvispi.cd_cont_200"
+lmd   = apppath.RESOURCES_PATH + "/etc/jarvispi.lm.DMP"
+dictd = apppath.RESOURCES_PATH + "/etc/jarvispi.dic"
 
 import pocketsphinx as ps
 import sphinxbase
 
 config = Decoder.default_config()
-config.set_string('-hmm', hmmd)
-config.set_string('-lm', lmdir)
-config.set_string('-dict', dictp)
+config.set_string('-hmm', hmdir)
+config.set_string('-lm', lmd)
+config.set_string('-dict', dictd)
 config.set_string('-logfn', '/dev/null')
+print hmdir
 decoder = ps.Decoder(config)
 
 
@@ -38,17 +40,15 @@ def _regenerate_request_url():
 	
 
 class STT:
-	def __init__(self, fp):
-		self.fp = fp
 	def get_value(self):
 		return ""
 
 class GoogleSTT(STT):
-	def get_value(self):
-		wav = wave.open(self.fp, 'rb')
+	def get_value(self, fp):
+		wav = wave.open(fp, 'rb')
 		frame_rate = wav.getframerate()
 		wav.close()
-		data = self.fp.read()
+		data = fp.read()
 
 		urls = _regenerate_request_url()
 		headers = {'content-type': 'audio/l16; rate=%s' % frame_rate}
@@ -87,21 +87,21 @@ class GoogleSTT(STT):
 			return results
 
 class PocketSphinxSTT(STT):
-	def get_value(self):
+	def get_value(self, fp):
 	   	# except RuntimeError, e:
 	   	#     print e
 	   	# 	exit()
-		result = []    
-	    self.fp.seek(44)
-	    data = self.fp.read()
-	    decoder.start_utt()
-	    decoder.process_raw(data, False, True)
-	    decoder.end_utt()
-	    hyp = decoder.hyp()
-	    try:
-	    	if hyp.hypstr != "":
-	    		result.append(hyp.hypstr)
-		except AttributeError:
+                result = []    
+                fp.seek(44)
+                data = fp.read()
+                decoder.start_utt()
+                decoder.process_raw(data, False, True)
+                decoder.end_utt()
+                hyp = decoder.hyp()
+                try:
+                        if hyp.hypstr != "":
+                                result.append(hyp.hypstr)
+                except AttributeError:
 			print "Can not regconize anything. Please speak again"
 			pass
-	    return result
+                return result

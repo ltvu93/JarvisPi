@@ -4,9 +4,11 @@ import os
 import tts
 import apppath
 
+
 from mic import Mic
 from brain import Brain
 from notifier import Notifier
+from stt import *
 
 class Conversation():
 	def __init__(self, nickname, profile):
