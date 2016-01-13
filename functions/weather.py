@@ -55,4 +55,4 @@ def handle(mic, comamnd):
 
 
 def isMatch(command):
-    return bool(re.search(ur"\bTHỜI TIẾT\b", command, re.IGNORECASE))
+    return bool(re.search(ur"\bTHỜI TIẾT\b", command, re.IGNORECASE)) or command == bool(re.search(ur"\bTHOWFI TIEEST\b", command, re.IGNORECASE))

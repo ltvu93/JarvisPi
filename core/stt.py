@@ -100,7 +100,7 @@ class PocketSphinxSTT(STT):
                 hyp = decoder.hyp()
                 try:
                         if hyp.hypstr != "":
-                                result.append(hyp.hypstr)
+                                result.append(hyp.hypstr.upper())
                 except AttributeError:
 			print "Can not regconize anything. Please speak again"
 			pass

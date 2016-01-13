@@ -17,10 +17,10 @@ def handle(mic, command):
 			tts.espeak_tts("Bạn có muốn tắt đèn không")
 			commands = mic.activeListen()
 			if commands:
-				if any(command == u"CÓ" for command in commands):
+				if any(command == u"CÓ" or command == "COS" for command in commands):
 					light.handle(mic, u"TẮT ĐÈN")
 					break
-				elif any(command == u"KHÔNG" for command in commands):
+				elif any(command == u"KHÔNG" or command == "KHOONG" for command in commands):
 					break
 	else:
 		tts.espeak_tts("Phòng tối")
@@ -28,12 +28,12 @@ def handle(mic, command):
 			tts.espeak_tts("Bạn có muốn bật đèn không")
 			commands = mic.activeListen()
 			if commands:
-				if any(command == u"CÓ" for command in commands):
+				if any(command == u"CÓ" or command == "COS" for command in commands):
 					light.handle(mic, u"BẬT ĐÈN")
 					break
-				elif any(command == u"KHÔNG" for command in commands):
+				elif any(command == u"KHÔNG" or command == "KHOONG" for command in commands):
 					break
 
 
 def isMatch(command):
-	return command == u"TRẠNG THÁI ÁNH SÁNG"
+	return command == u"TRẠNG THÁI ÁNH SÁNG" or command == "TRAJNG THASI ASNH SASNG"

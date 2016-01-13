@@ -20,5 +20,5 @@ def handle(mic, command):
 		tts.espeak_tts("Đã tắt đèn")
 
 def isMatch(command):
-	return command == u"BẬT ĐÈN" or command == u"TẮT ĐÈN"
+	return command == u"BẬT ĐÈN" or command == u"TẮT ĐÈN" or command == "BAAJT DDEFN" or command == "TAWST DDEFN"
 	

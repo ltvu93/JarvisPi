@@ -25,12 +25,12 @@ def handle(mic, comamnd):
 			tts.espeak_tts("Bạn có muốn tiếp tục hay không")
 			commands = mic.activeListen()
 			if commands:
-				if any(command == u"CÓ" for command in commands):
+				if any(command == u"CÓ" or command == "COS" for command in commands):
 					break
-				elif any(command == u"KHÔNG" for command in commands):
+				elif any(command == u"KHÔNG" or command == "KHOONG" for command in commands):
 					return
 
 		tts.espeak_tts("Kết thúc đọc tin tức")
 
 def isMatch(command):
-    return bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE))
+    return bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE)) or bool(re.search(r"\bTIN TUWSC\b", command, re.IGNORECASE))

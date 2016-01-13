@@ -30,4 +30,4 @@ def handle(mic, comamnd):
 
 def isMatch(command):
     #return command == u"MÀY SAO RỒI"
-    return bool(re.search(ur"\bTRẠNG THÁI VẬN HÀNH\b", command, re.IGNORECASE))
+    return bool(re.search(ur"\bTRẠNG THÁI VẬN HÀNH\b", command, re.IGNORECASE)) or bool(re.search(r"\bTRAJNG THASI VAAJN HAFNH\b", command, re.IGNORECASE))

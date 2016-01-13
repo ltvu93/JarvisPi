@@ -8,4 +8,4 @@ def handle(mic, comamnd):
     tts.espeak_tts(response)
 
 def isMatch(command):
-    return command == u"MẤY GIỜ RỒI"
+    return command == u"MẤY GIỜ RỒI" or command == "THOWFI GIAN"
