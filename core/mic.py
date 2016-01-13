@@ -15,8 +15,9 @@ CHANNELS = 1                    # audio channels
 RATE = 16000                    # Bit rate 16000kbps
 
 class Mic():
-    def __init__(self):
+    def __init__(self, stt):
         self.audio = pyaudio.PyAudio()
+        self.stt = stt
 
     def passiveListen(self, keyword):
         """
@@ -86,7 +87,7 @@ class Mic():
             wav_fp.close()
             f.seek(0)
 
-            transcripts = stt.gg_transale(f)
+            transcripts = stt.get_value(f)
         stream.stop_stream()
         stream.close()
         print transcripts
@@ -124,5 +125,5 @@ class Mic():
             wav_fp.close()
             f.seek(0)
             
-            return stt.gg_transale(f)            
+            return stt.get_value(f)            
         

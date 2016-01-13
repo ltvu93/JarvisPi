@@ -7,6 +7,22 @@ import urlparse
 import json
 
 import wave
+from pocketsphinx import *
+
+hmdir = "../resources/model_parameters/jarvispi.cd_cont_200"
+lmd   = "../resources/etc/jarvispi.lm.DMP"
+dictd = "../resources/etc/jarvispi.dic"
+
+import pocketsphinx as ps
+import sphinxbase
+
+config = Decoder.default_config()
+config.set_string('-hmm', hmmd)
+config.set_string('-lm', lmdir)
+config.set_string('-dict', dictp)
+config.set_string('-logfn', '/dev/null')
+decoder = ps.Decoder(config)
+
 
 def _regenerate_request_url():
 	query = urllib.urlencode({'output': 'json',
@@ -19,45 +35,73 @@ def _regenerate_request_url():
 	return urlparse.urlunparse(
 		('https', 'www.google.com', '/speech-api/v2/recognize', '',
 			query, ''))
+	
 
-def gg_transale(fp):
-	wav = wave.open(fp, 'rb')
-	frame_rate = wav.getframerate()
-	wav.close()
-	data = fp.read()
+class STT:
+	def __init__(self, fp):
+		self.fp = fp
+	def get_value(self):
+		return ""
 
-	urls = _regenerate_request_url()
-	headers = {'content-type': 'audio/l16; rate=%s' % frame_rate}
-	r = requests.post(urls, data = data, headers = headers)
+class GoogleSTT(STT):
+	def get_value(self):
+		wav = wave.open(self.fp, 'rb')
+		frame_rate = wav.getframerate()
+		wav.close()
+		data = self.fp.read()
 
-	try:
-		r.raise_for_status()
-	except requests.exceptions.HTTPError:
-		print 'Request failed with http status %d' % r.status_code
+		urls = _regenerate_request_url()
+		headers = {'content-type': 'audio/l16; rate=%s' % frame_rate}
+		r = requests.post(urls, data = data, headers = headers)
 
-		if r.status_code == requests.codes['forbidden']:
-			print 'Status 403 is probably caused by an invalid Google API key.'
-			return []
+		try:
+			r.raise_for_status()
+		except requests.exceptions.HTTPError:
+			print 'Request failed with http status %d' % r.status_code
 
-	r.encoding = 'utf-8'
+			if r.status_code == requests.codes['forbidden']:
+				print 'Status 403 is probably caused by an invalid Google API key.'
+				return []
 
-	try:
-		response = json.loads(list(r.text.strip().split('\n', 1))[-1])
+		r.encoding = 'utf-8'
 
-		if len(response['result']) == 0:
-		# Response result is empty
-			raise ValueError('Nothing has been transcribed.')
+		try:
+			response = json.loads(list(r.text.strip().split('\n', 1))[-1])
 
-		results = [alt['transcript'] for alt in response['result'][0]['alternative']]
+			if len(response['result']) == 0:
+			# Response result is empty
+				raise ValueError('Nothing has been transcribed.')
 
-	except ValueError as e:
-				print 'Empty response: %s' % e.args[0]
-				results = []
+			results = [alt['transcript'] for alt in response['result'][0]['alternative']]
 
-	except (KeyError, IndexError):
-				#self._logger.warning('Cannot parse response.', exc_info=True)
-				results = []
-	else:
-		#Convert all results to lowercase
-		results = tuple(result.upper() for result in results)
-		return results
+		except ValueError as e:
+					print 'Empty response: %s' % e.args[0]
+					results = []
+
+		except (KeyError, IndexError):
+					#self._logger.warning('Cannot parse response.', exc_info=True)
+					results = []
+		else:
+			#Convert all results to lowercase
+			results = tuple(result.upper() for result in results)
+			return results
+
+class PocketSphinxSTT(STT):
+	def get_value(self):
+	   	# except RuntimeError, e:
+	   	#     print e
+	   	# 	exit()
+		result = []    
+	    self.fp.seek(44)
+	    data = self.fp.read()
+	    decoder.start_utt()
+	    decoder.process_raw(data, False, True)
+	    decoder.end_utt()
+	    hyp = decoder.hyp()
+	    try:
+	    	if hyp.hypstr != "":
+	    		result.append(hyp.hypstr)
+		except AttributeError:
+			print "Can not regconize anything. Please speak again"
+			pass
+	    return result

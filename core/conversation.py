@@ -12,7 +12,11 @@ class Conversation():
 	def __init__(self, nickname, profile):
 		self.nickname = nickname
 		self.profile = profile
-		self.mic = Mic()
+		if profile["stt"]["name"] == "pocketsphinx":
+			self.stt = PocketSphinxSTT()
+		elif profile["stt"]["name"] == "google":
+			self.stt = GoogleSTT()
+		self.mic = Mic(self.stt)
 		self.brain = Brain(self.mic)
 		#self.notifier = Notifier()
 
