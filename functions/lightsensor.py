@@ -2,6 +2,8 @@
 import RPi.GPIO as GPIO
 import light
 from core import tts
+from core import off_tts
+from core import text2num
 
 LIGHT_SENSOR = 22
 
