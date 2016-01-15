@@ -11,7 +11,7 @@ def set_alarm(hour, minute):
         currentHour = datetime.now().hour
         currentMinute = datetime.now().minute
         if currentHour == hour and currentMinute == minute:
-            print "Play alarm"
+            print "Play ALARM"
             break
         else:
             time.sleep(10)
@@ -23,9 +23,17 @@ def handle(mic, command):
     hour = text_to_num_2(hour_str)
     minute_str = (exist_str.split("PHÚT"))[0].strip()
     minute = text_to_num_2(minute_str)
+
+    currentHour = datetime.now().hour
+    currentMinute = datetime.now().minute
+
+    if hour < currentHour or (hour == currentHour and minute < currentMinute):
+        print "Thời gian bạn đặt chưa đúng"
+        return
+
     try:
         t=threading.Thread(target=set_alarm, args=(hour, minute,))
-        t.daemon = True  # set thread to daemon ('ok' won't be printed in this case)
+        t.setDaemon(True)
         t.start()
     except:
         print "Error: unable to start thread"

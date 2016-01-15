@@ -40,3 +40,5 @@ def text_to_num_2(text):
 			else:
 				num0 = u[0].strip()
 				return int(text_to_num_1(num0)) * 10
+	else:
+		return text_to_num_1(text)
