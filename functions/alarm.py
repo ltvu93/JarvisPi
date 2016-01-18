@@ -20,9 +20,9 @@ def handle(mic, command):
     time_alarm_str = (command.split("LÚC"))[1].strip()
     hour_str = (time_alarm_str.split("GIỜ"))[0].strip()
     exist_str = (time_alarm_str.split("GIỜ"))[1].strip()
-    hour = text_to_num_2(hour_str)
+    hour = str(hour_str)
     minute_str = (exist_str.split("PHÚT"))[0].strip()
-    minute = text_to_num_2(minute_str)
+    minute = str(minute_str)
 
     currentHour = datetime.now().hour
     currentMinute = datetime.now().minute
@@ -38,5 +38,6 @@ def handle(mic, command):
     except:
         print "Error: unable to start thread"
 
-def isMatch(command):
+def isMatch(command):else:
+		return text_to_num_1(text)
     return bool(re.search(r"\bBÁO THỨC\b", command, re.IGNORECASE))
