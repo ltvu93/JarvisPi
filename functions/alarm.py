@@ -17,12 +17,20 @@ def set_alarm(hour, minute):
             time.sleep(10)
 
 def handle(mic, command):
-    time_alarm_str = (command.split("LÚC"))[1].strip()
-    hour_str = (time_alarm_str.split("GIỜ"))[0].strip()
-    exist_str = (time_alarm_str.split("GIỜ"))[1].strip()
-    hour = str(hour_str)
-    minute_str = (exist_str.split("PHÚT"))[0].strip()
-    minute = str(minute_str)
+    hour = -1
+    minute = -1
+    matchObj = re.match(ur"ĐẶT BÁO THỨC LÚC (\d|1[\d]|2[0-3]) GIỜ (\d|[0-5][\d]) PHÚT", command, re.M|re.I)
+    if matchObj:
+        hour = matchObj1.group(1).encode("utf-8")
+        minute = matchObj1.group(2).encode("utf-8")
+    else:
+        matchObj1 = re.match(ur"ĐẶT BÁO THỨC LÚC (\d|1[\d]|2[0-3]) GIỜ", command, re.M|re.I)
+        if matchObj1:
+            hour = matchObj1.group(1).encode("utf-8")
+            minute = 0
+        else:
+            print "Thời gian bạn đặt chưa đúng"
+            return
 
     currentHour = datetime.now().hour
     currentMinute = datetime.now().minute
