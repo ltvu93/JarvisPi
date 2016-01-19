@@ -4,23 +4,16 @@ import os
 import tts
 import apppath
 
-
-from mic import Mic
 from brain import Brain
 from signal import Signal
 from stt import *
 
 class Conversation():
-	def __init__(self, nickname, profile):
+	def __init__(self, nickname, mic, profile):
 		self.nickname = nickname
 		self.profile = profile
-		if profile["stt"]["name"] == "pocketsphinx":
-			self.stt = PocketSphinxSTT()
-		elif profile["stt"]["name"] == "google":
-			self.stt = GoogleSTT()
-		self.mic = Mic(self.stt)
-		self.signal = Signal(24)
-		self.brain = Brain(self.mic, self.signal)
+		self.mic = mic
+		self.brain = Brain(self.mic, self.profile)
 		#self.notifier = Notifier()
 
 	def handleForever(self):

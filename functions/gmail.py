@@ -54,7 +54,7 @@ def getUnreadEmails(limit = None):
 
 	return msgs
 
-def handle(mic, comamnd):
+def handle(mic, comamnd, profile):
 
 	try:
 		msgs = getUnreadEmails(limit = 5)

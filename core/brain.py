@@ -10,7 +10,6 @@ class Brain():
 		self.functions  = self.getFunctions()
 		self.mic = mic
 		self.signal = signal
-		#self.tts = tts.OnlineTTS()
 
 	def getFunctions(self):
 		"""Get all functions available of JarvisPi"""
@@ -37,7 +36,7 @@ class Brain():
 				match = function.isMatch(command)
 				if match:
                                         self.signal.start_blink()
-					function.handle(self.mic, command)
+					function.handle(self.mic, command, self.profile)
 					self.signal.stop_blink()
 					return
 

@@ -2,7 +2,7 @@
 import datetime
 from core import converter
 
-def handle(mic, comamnd):
+def handle(mic, comamnd, profile):
     now = datetime.datetime.now()
     if now.minute == 0:
         response = "Bây giờ là %d giờ" % (now.hour)

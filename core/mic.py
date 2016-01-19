@@ -14,12 +14,12 @@ CHANNELS = 1                    # audio channels
 RATE = 16000                    # Bit rate 16000kbps
 
 class Mic():
-    def __init__(self, stt):
+    def __init__(self, passive_stt, active_stt):
         self.audio = pyaudio.PyAudio()
-        self.stt = stt
-        self.tts = OnlineTTS()
+		self.passive_stt = passive_stt
+		self.active_stt = active_stt
 
-    def passiveListen(self, keyword):
+    def passiveListen_old(self, keyword):
         """
         Passive listen keyword.
 
@@ -27,13 +27,14 @@ class Mic():
         - THRESHOLD if listened keyword
         - None if don't
         """
-        
+
         # new audio stream
         stream = self.audio.open(format=FORMAT,
                                 channels=CHANNELS,
                                 rate=RATE,
                                 input=True,
                                 frames_per_buffer=CHUNK)
+
         # time to get RMS of enviroment
         THRESHOLD_TIME = 1          
         listRms = []
@@ -93,22 +94,109 @@ class Mic():
         if transcripts:
             if any(keyword == pharse for pharse in transcripts):
                 return THRESHOLD
+        
         return None
+		
+	def passiveListen(self, keyword):
+            """
+            Passive listen keyword.
 
-    def activeListen(self):
-        """listen command of user when JarvisPi is called."""
+            Return:
+            - THRESHOLD if listened keyword
+            - None if don't
+            """
 
-        stream = self.audio.open(format=FORMAT,
+            # new audio stream
+            stream = self.audio.open(format=FORMAT,
                                 channels=CHANNELS,
                                 rate=RATE,
                                 input=True,
                                 frames_per_buffer=CHUNK)
-        LISTEN_TIME = 6
+								
+            self.passive_stt.listen_hot_keyword(keyword, stream)
+	
+	def fetchThreshold(self):
+
+            # TODO: Consolidate variables from the next three functions
+            THRESHOLD_MULTIPLIER = 1.8
+            RATE = 16000
+            CHUNK = 1024
+
+            # number of seconds to allow to establish threshold
+            THRESHOLD_TIME = 1
+
+            # prepare recording stream
+            stream = self._audio.open(format=pyaudio.paInt16,
+                                  channels=1,
+                                  rate=RATE,
+                                  input=True,
+                                  frames_per_buffer=CHUNK)
+
+            # stores the audio data
+            frames = []
+
+            # stores the lastN score values
+            lastN = [i for i in range(20)]
+
+            # calculate the long run average, and thereby the proper threshold
+            for i in range(0, RATE / CHUNK * THRESHOLD_TIME):
+
+                data = stream.read(CHUNK)
+                frames.append(data)
+
+                # save this data point as a score
+                lastN.pop(0)
+                lastN.append(self.getScore(data))
+                average = sum(lastN) / len(lastN)
+
+            stream.stop_stream()
+            stream.close()
+
+            # this will be the benchmark to cause a disturbance over!
+            THRESHOLD = average * THRESHOLD_MULTIPLIER
+
+            return THRESHOLD
+	
+	def activeListen(self):
+		options = activeListenAllOptions()
+		if options:
+			return options[0]
+			
+        def activeListenToAllOptions(self):
+            """listen command of user when JarvisPi is called."""
+
+	    THRESHOLD = self.fetchThreshold()
+		
+	    tts.speak(apppath.get_resources('yes.mp3'))
+
+        # prepare recording stream
+        stream = self._audio.open(format=pyaudio.paInt16,
+                                  channels=1,
+                                  rate=RATE,
+                                  input=True,
+                                  frames_per_buffer=CHUNK)
+
         frames = []
+        # increasing the range # results in longer pause after command
+        # generation
+        lastN = [THRESHOLD * 1.2 for i in range(30)]
 
         for i in range(0, RATE / CHUNK * LISTEN_TIME):
+
             data = stream.read(CHUNK)
             frames.append(data)
+            score = self.getScore(data)
+
+            lastN.pop(0)
+            lastN.append(score)
+
+            average = sum(lastN) / float(len(lastN))
+
+            # TODO: 0.8 should not be a MAGIC NUMBER!
+            if average < THRESHOLD * 0.8:
+                break
+
+        # save the audio data
         stream.stop_stream()
         stream.close()
         self.tts.speak_long_sentence(apppath.get_resources('beep.wav'))
@@ -121,10 +209,6 @@ class Mic():
             wav_fp.writeframes(''.join(frames))
             wav_fp.close()
             f.seek(0)
-            
-            transcripts = self.stt.get_value(f)
-            print transcripts
-            return transcripts
-        
-    def get_tts(self):
-        return self.tts
+			
+            tts.speak(apppath.get_resources('beep.wav'))
+            return stt.gg_transale(f)

@@ -3,7 +3,7 @@ import sys
 from core import tts
 import time
 
-def handle(mic, comamnd):
+def handle(mic, comamnd, profile):
     tts.espeak_tts("BI SẼ TỰ TẮT TRONG 5 GIÂY NỮA")
     x = 5;
     while x >= 1:

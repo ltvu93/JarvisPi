@@ -26,7 +26,7 @@ def _generate_weather_url():
 		('http', 'api.openweathermap.org', '/data/2.5/weather', '',
 			query, ''))
 
-def handle(mic, comamnd):
+def handle(mic, comamnd, profile):
 	url = _generate_weather_url()
 	rp = requests.get(url)
 
