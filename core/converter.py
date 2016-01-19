@@ -128,6 +128,3 @@ def num_to_text(num):
 						return num_to_text_1(t) + " NGHÌN " + num_to_text_1(h) + " TRĂM"
 			else:
 				return num_to_text_1(t) + " NGHÌN " + num_to_text_3(hdu)
-
-
-print num_to_text(3456)
