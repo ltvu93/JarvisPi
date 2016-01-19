@@ -5,8 +5,8 @@ import urllib
 import urlparse
 import requests
 import json
+from core import converter
 
-from core import tts
 
 def _generate_weather_url():
 	"""
@@ -49,9 +49,9 @@ def handle(mic, comamnd):
 		humidity = rpJson['main']['humidity']
 
 		response = "Hôm nay %s, " % weather_desc
-		response += "nhiệt độ trung bình %d độ C, " % temp
+		response += "nhiệt độ trung bình %d độ xê, " % temp
 		response += "độ ẩm %d phần trăm" % humidity
-		tts.espeak_tts(response)
+		mic.get_tts().speak(converter.find_num_and_replace(response))
 
 
 def isMatch(command):

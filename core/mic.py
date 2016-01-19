@@ -5,7 +5,7 @@ import wave       # save file audio
 import audioop    # interact with raw data audio, get RMS
 
 import apppath
-import tts
+from tts import OnlineTTS
 
 # Microphone stream config.
 CHUNK = 1024                    # CHUNKS buffer bytes read form mic each
@@ -17,6 +17,7 @@ class Mic():
     def __init__(self, stt):
         self.audio = pyaudio.PyAudio()
         self.stt = stt
+        self.tts = OnlineTTS()
 
     def passiveListen(self, keyword):
         """
@@ -110,7 +111,7 @@ class Mic():
             frames.append(data)
         stream.stop_stream()
         stream.close()
-        tts.speak(apppath.get_resources('beep.wav'))
+        self.tts.speak_long_sentence(apppath.get_resources('beep.wav'))
 
         with tempfile.SpooledTemporaryFile(mode='w+b') as f:
             wav_fp = wave.open(f, 'wb')
@@ -125,3 +126,5 @@ class Mic():
             print transcripts
             return transcripts
         
+    def get_tts(self):
+        return self.tts

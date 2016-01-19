@@ -1,7 +1,8 @@
 # coding: utf-8
 import re
 import feedparser 		#https://wiki.python.org/moin/RssLibraries
-from core import tts
+
+from core import converter
 
 def getTruePostSummary(summary):
 	index = summary.index("</a>")
@@ -14,20 +15,20 @@ def handle(mic, comamnd):
 
 		rssTitle = data['feed']['title'].encode('utf-8')
 	except:
-		tts.espeak_tts("Kết nối mạng có vấn đề.      ")
-		tts.espeak_tts("Vui lòng thử lại.      ")
+		mic.get_tts().speak("Kết nối mạng có vấn đề.      ")
+		mic.get_tts().speak("Vui lòng thử lại.      ")
 		return
-	tts.espeak_tts(rssTitle)
+	mic.get_tts().speak(rssTitle)
 
 	for post in data.entries:
 		title = post.title.encode('utf-8')
 		summmary = getTruePostSummary(post.summary.encode('utf-8'))
 		#link = post.link
 
-		tts.espeak_tts(title)
-		tts.espeak_tts(summmary)
+		mic.get_tts().speak(converter.find_num_and_replace(title + ". " + summmary))
+		
 		while True:
-			tts.espeak_tts("Bạn có muốn tiếp tục hay không")
+			mic.get_tts().speak("Bạn có muốn tiếp tục hay không")
 			commands = mic.activeListen()
 			if commands:
 				if any(command == u"CÓ" for command in commands):
@@ -35,11 +36,13 @@ def handle(mic, comamnd):
 				elif any(command == "COS" for command in commands):
 					break
 				elif any(command == u"KHÔNG" for command in commands):
+                                        mic.get_tts().speak("Kết thúc đọc tin tức")
 					return
 				elif any(command == u"KHOONG" for command in commands):
+                                        mic.get_tts().speak("Kết thúc đọc tin tức")
 					return
 
-		tts.espeak_tts("Kết thúc đọc tin tức")
+		#tts.online_speak("Kết thúc đọc tin tức")
 
 def isMatch(command):
-    return bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE)) or bool(re.search(r"\bTIN TUWSC\b", command, re.IGNORECASE))
+        return bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE)) or bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE))

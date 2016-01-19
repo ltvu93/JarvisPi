@@ -42,13 +42,18 @@ class EspeakTTS:
                 os.remove(fname)
         def speak_long_sentence(self, filePath):
                 subprocess.call(['aplay', filePath])
+                
 class OnlineTTS:
-        def speak(self, pharse):
-                r = requests.post("http://speechlab.uit.edu.vn/api/index.php", data = {"text": pharse, "voice":"quoc800"})
-                root =  html.fromstring(r.text)
-                pre = root.findall(".//pre")
-                str_pre =  stringify_children(pre[0]).strip()
-                cmd = "mpg123 -f 98304 " + str_pre
-                subprocess.call(cmd, shell=True) 
+    def speak(self, pharse):
+        r = requests.post("http://speechlab.uit.edu.vn/api/index.php", data = {"text": pharse, "voice":"quoc800"})
+        root =  html.fromstring(r.text)
+        pre = root.findall(".//pre")
+        str_pre =  stringify_children(pre[0]).strip()
+        cmd = "mpg123 -f 196680 " + str_pre
+        subprocess.call(cmd, shell=True)
+    def speak_long_sentence(self, filePath):
+        subprocess.call(['aplay', filePath])
+    def speak_mp3(self, filePath):
+        subprocess.call(['omxplayer', filePath])
                 
                 
