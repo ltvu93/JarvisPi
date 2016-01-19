@@ -103,7 +103,7 @@ class Mic():
                                 rate=RATE,
                                 input=True,
                                 frames_per_buffer=CHUNK)
-        LISTEN_TIME = 3
+        LISTEN_TIME = 6
         frames = []
 
         for i in range(0, RATE / CHUNK * LISTEN_TIME):

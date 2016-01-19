@@ -14,9 +14,9 @@ def handle(mic, command):
 	isLight = not GPIO.input(LIGHT_SENSOR)
 	#isLight = True
 	if isLight:
-		tts.espeak_tts("Phòng sáng")
+		mic.get_tts().speak("Phòng sáng")
 		while True:
-			tts.espeak_tts("Bạn có muốn tắt đèn không")
+			mic.get_tts().speak("Bạn có muốn tắt đèn không")
 			commands = mic.activeListen()
 			if commands:
 				if any(command == u"CÓ" for command in commands):
@@ -30,9 +30,9 @@ def handle(mic, command):
 				elif any(command == "KHOONG" for command in commands):
 					break
 	else:
-		tts.espeak_tts("Phòng tối")
+		mic.get_tts().speak("Phòng tối")
 		while True:
-			tts.espeak_tts("Bạn có muốn bật đèn không")
+			mic.get_tts().speak("Bạn có muốn bật đèn không")
 			commands = mic.activeListen()
 			if commands:
 				if any(command == u"CÓ" for command in commands):

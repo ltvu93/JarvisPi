@@ -1,19 +1,19 @@
 # coding: utf-8
 import time
 import re
-import thread
-from datetime import datetime 
-from core import off_tts
-from core import text2num
+import threading
+from datetime import datetime
 
-def set_alarm(hour, minute):
+def set_alarm(mic, hour, minute):
+    mic.get_tts().speak("ĐẶT BÁO THỨC ")
     while True:
         currentHour = datetime.now().hour
         currentMinute = datetime.now().minute
-        if currentHour == hour and currentMinute == minute:
-            print "Play ALARM"
+        if currentHour == int(hour) and currentMinute == int(minute):
+            mic.get_tts().speak_mp3("/home/pi/Music/4b896ff9151263672609e9cb9cc04c00.mp3")
             break
         else:
+            print "Running..."
             time.sleep(10)
 
 def handle(mic, command):
@@ -21,30 +21,30 @@ def handle(mic, command):
     minute = -1
     matchObj = re.match(ur"ĐẶT BÁO THỨC LÚC (\d|1[\d]|2[0-3]) GIỜ (\d|[0-5][\d]) PHÚT", command, re.M|re.I)
     if matchObj:
-        hour = matchObj1.group(1).encode("utf-8")
-        minute = matchObj1.group(2).encode("utf-8")
+        hour = matchObj.group(1).encode("utf-8")
+        minute = matchObj.group(2).encode("utf-8")
     else:
-        matchObj1 = re.match(ur"ĐẶT BÁO THỨC LÚC (\d|1[\d]|2[0-3]) GIỜ", command, re.M|re.I)
-        if matchObj1:
-            hour = matchObj1.group(1).encode("utf-8")
+        matchObj = re.match(ur"ĐẶT BÁO THỨC LÚC (\d|1[\d]|2[0-3]) GIỜ", command, re.M|re.I)
+        if matchObj:
+            hour = matchObj.group(1).encode("utf-8")
             minute = 0
         else:
-            print "Thời gian bạn đặt chưa đúng"
+            mic.get_tts().speak("Thời gian bạn đặt chưa đúng")
             return
 
     currentHour = datetime.now().hour
     currentMinute = datetime.now().minute
 
     if hour < currentHour or (hour == currentHour and minute < currentMinute):
-        print "Thời gian bạn đặt chưa đúng"
+        mic.get_tts().speak("Thời gian bạn đặt chưa đúng")
         return
 
     try:
-        t=threading.Thread(target=set_alarm, args=(hour, minute,))
+        t=threading.Thread(target=set_alarm, args=(mic, hour, minute,))
         t.setDaemon(True)
         t.start()
     except:
         print "Error: unable to start thread"
 
 def isMatch(command):
-    return bool(re.search(r"\bBÁO THỨC\b", command, re.IGNORECASE))
+    return bool(re.search(ur"\bBÁO THỨC\b", command, re.IGNORECASE))

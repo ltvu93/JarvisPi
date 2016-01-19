@@ -4,6 +4,10 @@ from core import converter
 
 def handle(mic, comamnd):
     now = datetime.datetime.now()
+    if now.minute == 0:
+        response = "Bây giờ là %d giờ" % (now.hour)
+    else:
+        response = "Bây giờ là %d giờ %d phút" % (now.hour, now.minute)
     response = "Bây giờ là %d giờ %d phút" % (now.hour, now.minute)
     mic.get_tts().speak(converter.find_num_and_replace(response))
 

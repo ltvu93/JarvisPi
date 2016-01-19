@@ -133,8 +133,11 @@ def num_to_text(num):
 
 def find_num_and_replace(string):
         result = string
-        result.replace("VnExpress", "VI EN ỊCH RÉT")
-        result.replace("RSS", "RỜ ÉT ÉT")
+        result = result.replace("...", " ")
+        result = result.replace('"', " ")
+        result = result.replace(':"', " ")
+        result = result.replace(':', " ")
+        result = result.replace(';', " ")
         number = re.findall(r'\d+', string)
         i = 0
         while (i < len(number)):

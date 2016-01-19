@@ -45,4 +45,4 @@ def handle(mic, comamnd):
 		#tts.online_speak("Kết thúc đọc tin tức")
 
 def isMatch(command):
-        return bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE)) or bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE))
+        return bool(re.search(ur"\bTIN TỨC\b", command, re.IGNORECASE)) or bool(re.search(r"\bTIN TUWSC\b", command, re.IGNORECASE))

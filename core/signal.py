@@ -6,7 +6,7 @@ class Signal:
         self.light = num
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.light, GPIO.OUT)
-        self.p = GPIO.PWM(self.light, 5)
+        self.p = GPIO.PWM(self.light, 3)
 
     def turn_on(self):
         GPIO.output(self.light, True)
