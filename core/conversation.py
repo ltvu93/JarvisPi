@@ -7,7 +7,7 @@ import apppath
 
 from mic import Mic
 from brain import Brain
-from notifier import Notifier
+from signal import Signal
 from stt import *
 
 class Conversation():
@@ -20,6 +20,7 @@ class Conversation():
 			self.stt = GoogleSTT()
 		self.mic = Mic(self.stt)
 		self.brain = Brain(self.mic)
+		self.signal = Signal(24)
 		#self.notifier = Notifier()
 
 	def handleForever(self):
@@ -31,11 +32,13 @@ class Conversation():
 			for notif in notifications:
 				print str(notif)
                         '''
+                        self.signal.turn_off()
 			print "Start listening keyword '%s'" % self.nickname
 			result = self.mic.passiveListen(self.nickname)
 			print "Stop listening keyword '%s'" % self.nickname
 
 			if result:
+                                self.signal.turn_on()
 				print "Start listening command"
 				#tts.speak(apppath.get_resources('yes.mp3'))
 				tts.speak(apppath.get_resources('yes.wav'))

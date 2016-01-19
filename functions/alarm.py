@@ -46,6 +46,5 @@ def handle(mic, command):
     except:
         print "Error: unable to start thread"
 
-def isMatch(command):else:
-		return text_to_num_1(text)
+def isMatch(command):
     return bool(re.search(r"\bBÁO THỨC\b", command, re.IGNORECASE))

@@ -26,14 +26,13 @@ class Mic():
         - THRESHOLD if listened keyword
         - None if don't
         """
-
+        
         # new audio stream
         stream = self.audio.open(format=FORMAT,
                                 channels=CHANNELS,
                                 rate=RATE,
                                 input=True,
                                 frames_per_buffer=CHUNK)
-
         # time to get RMS of enviroment
         THRESHOLD_TIME = 1          
         listRms = []
@@ -93,7 +92,6 @@ class Mic():
         if transcripts:
             if any(keyword == pharse for pharse in transcripts):
                 return THRESHOLD
-        
         return None
 
     def activeListen(self):
@@ -104,7 +102,6 @@ class Mic():
                                 rate=RATE,
                                 input=True,
                                 frames_per_buffer=CHUNK)
-
         LISTEN_TIME = 3
         frames = []
 

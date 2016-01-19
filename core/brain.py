@@ -9,6 +9,7 @@ class Brain():
 		self.logger = logging.getLogger(__name__)
 		self.functions  = self.getFunctions()
 		self.mic = mic
+		self.tts = tts.OnlineTTS()
 
 	def getFunctions(self):
 		"""Get all functions available of JarvisPi"""
@@ -38,4 +39,4 @@ class Brain():
 					return
 
 		#TODO: speak cannot understant commands
-		tts.espeak_tts("Không tìm thấy lệnh")
+		self.tts.speak("Không tìm thấy lệnh")
