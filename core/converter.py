@@ -9,7 +9,7 @@ def text_to_num_1(text):
 		return 2
 	elif text == "BA":
 		return 3
-	elif text == "BỐN" or text == "TƯ":
+	elif text == "BỐN" or text == "TƯ":s
 		return 4
 	elif text == "NĂM" or text == "LĂM":
 		return 5
@@ -42,3 +42,8 @@ def text_to_num_2(text):
 				return int(text_to_num_1(num0)) * 10
 	else:
 		return text_to_num_1(text)
+def num_to_text(num):
+        if num < 10:
+                if num == 0:
+                        return ""
+        
