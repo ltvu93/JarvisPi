@@ -8,49 +8,36 @@ import json
 import apppath
 
 import wave
+
+import sphinxbase
+import pocketsphinx as ps
 from pocketsphinx import *
 
 hmdir = apppath.RESOURCES_PATH + "/model_parameters/jarvispi.cd_cont_200"
 lmd   = apppath.RESOURCES_PATH + "/etc/jarvispi.lm.DMP"
 dictd = apppath.RESOURCES_PATH + "/etc/jarvispi.dic"
 
-import pocketsphinx as ps
-import sphinxbase
-
-config = Decoder.default_config()
-config.set_string('-hmm', hmdir)
-config.set_string('-lm', lmd)
-config.set_string('-dict', dictd)
-config.set_string('-logfn', '/dev/null')
-print hmdir
-decoder = ps.Decoder(config)
-
-
-def _regenerate_request_url():
-	query = urllib.urlencode({'output': 'json',
-							'client': 'chromium',
-							'lang': 'vi',
-							'key': 'AIzaSyDA_NpkLWTkCaVIIho8u8FTjlF-WdJQu_E',
-							'maxresults': 6,
-							'pfilter': 2})
-	
-	return urlparse.urlunparse(
-		('https', 'www.google.com', '/speech-api/v2/recognize', '',
-			query, ''))
-	
-
 class STT:
 	def get_value(self):
 		return ""
 
 class GoogleSTT(STT):
+	def _regenerate_request_url():
+		query = urllib.urlencode({'output': 'json',
+								'client': 'chromium',
+								'lang': 'vi',
+								'key': 'AIzaSyDA_NpkLWTkCaVIIho8u8FTjlF-WdJQu_E',
+								'maxresults': 6,
+								'pfilter': 2})
+		return urlparse.urlunparse(('https', 'www.google.com', '/speech-api/v2/recognize', '', query, ''))
+		
 	def get_value(self, fp):
 		wav = wave.open(fp, 'rb')
 		frame_rate = wav.getframerate()
 		wav.close()
 		data = fp.read()
 
-		urls = _regenerate_request_url()
+		urls = self._regenerate_request_url()
 		headers = {'content-type': 'audio/l16; rate=%s' % frame_rate}
 		r = requests.post(urls, data = data, headers = headers)
 
@@ -87,21 +74,44 @@ class GoogleSTT(STT):
 			return results
 
 class PocketSphinxSTT(STT):
+	def __init__(self, mode='passive'):
+		self.logger = logging.getLogger(__name__)
+		
+		config = Decoder.default_config()
+		config.set_string('-hmm', hmdir)
+		config.set_string('-dict', dictd)
+		
+		if(mode == 'passive'):
+			config.set_string('-keyphrase', 'bi')
+			config.set_float('-kws_threshold', 1e-10)		
+		else:
+			config.set_string('-lm', lmd)
+			config.set_string('-logfn', '/dev/null')
+
+		self.decoder = ps.Decoder(config)
+		
+	def listen_hot_keyword(self, keyword, stream):
+		self.decoder.start_utt()
+		stream.start_stream()
+		
+		while True:
+			buf = stream.read(1024)
+			decoder.process_raw(buf, False, False)
+			if decoder.hyp() != None and decoder.hyp().hypstr == keyword.lower():
+				self.logger.info("Detected keyword: " + keyword)
+				decoder.end_utt()
+		
 	def get_value(self, fp):
-	   	# except RuntimeError, e:
-	   	#     print e
-	   	# 	exit()
-                result = []    
-#                fp.seek(44)
-                data = fp.read()
-                decoder.start_utt()
-                decoder.process_raw(data, False, False)
-                decoder.end_utt()
-                hyp = decoder.hyp()
-                try:
-                        if hyp.hypstr != "":
-                                result.append(hyp.hypstr.upper())
-                except AttributeError:
+		result = []
+		data = fp.read()
+		decoder.start_utt()
+		decoder.process_raw(data, False, False)
+		decoder.end_utt()
+		hyp = decoder.hyp()
+		try:
+			if hyp.hypstr != "":
+			result.append(hyp.hypstr.upper())
+		except AttributeError:
 			print "Can not regconize anything. Please speak again"
 			pass
-                return result
+			return result

@@ -8,7 +8,7 @@ def getTruePostSummary(summary):
 	index = summary.index("</a>")
 	return summary[index+4:]
 
-def handle(mic, comamnd):
+def handle(mic, comamnd, profile):
 	try:
 		url = 'http://vnexpress.net/rss/tin-moi-nhat.rss'
 		data = feedparser.parse(url)	

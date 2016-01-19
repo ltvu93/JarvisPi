@@ -7,7 +7,7 @@ import time
 
 from core import tts
 
-def handle(mic, comamnd):
+def handle(mic, comamnd, profile):
 	os, name, version, _, _, _ = platform.uname()
 	version = version.split('-')[0]
 	cores = psutil.cpu_count()

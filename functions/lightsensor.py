@@ -10,7 +10,7 @@ LIGHT_SENSOR = 22
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LIGHT_SENSOR, GPIO.IN)
 
-def handle(mic, command):
+def handle(mic, command, profile):
 	isLight = not GPIO.input(LIGHT_SENSOR)
 	#isLight = True
 	if isLight:

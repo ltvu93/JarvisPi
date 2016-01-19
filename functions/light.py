@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LIGHT_ONE, GPIO.OUT, initial=GPIO.HIGH)
 GPIO.setup(LIGHT_TWO, GPIO.OUT, initial=GPIO.HIGH)
 
-def handle(mic, command):
+def handle(mic, command, profile):
 	if command == u"BẬT ĐÈN" or command == "BAAJT DDEFN":
 		GPIO.output(LIGHT_ONE, GPIO.LOW)
 		GPIO.output(LIGHT_TWO, GPIO.LOW)
