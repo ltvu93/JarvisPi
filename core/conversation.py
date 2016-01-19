@@ -19,8 +19,8 @@ class Conversation():
 		elif profile["stt"]["name"] == "google":
 			self.stt = GoogleSTT()
 		self.mic = Mic(self.stt)
-		self.brain = Brain(self.mic)
 		self.signal = Signal(24)
+		self.brain = Brain(self.mic, self.signal)
 		#self.notifier = Notifier()
 
 	def handleForever(self):

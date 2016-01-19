@@ -126,5 +126,16 @@ def num_to_text(num):
 						return num_to_text_1(t) + " NGHÌN " + num_to_text_1(h) + " TRĂM LINH" + num_to_text_1(u)
 					else:
 						return num_to_text_1(t) + " NGHÌN " + num_to_text_1(h) + " TRĂM"
+				else:
+                                        return num_to_text_1(t) + " NGHÌN " + num_to_text_1(h) + " TRĂM" + num_to_text_2(du)
 			else:
 				return num_to_text_1(t) + " NGHÌN " + num_to_text_3(hdu)
+
+def find_num_and_replace(string):
+        result = string
+        number = re.findall(r'\d+', string)
+        i = 0
+        while (i < len(number)):
+                result = result.replace(str(number[i]), str(num_to_text(int(number[i]))))
+                i += 1
+        return result
