@@ -16,17 +16,10 @@ def stringify_children(node):
     # filter removes possible Nones in texts and tails
     return ''.join(filter(None, parts))
 
-def speak(filePath):
+def speak_wav(*filePath):
     subprocess.call(['aplay', filePath])
-
-def gg_tts(phrase):
-	tts = gTTS(text=phrase, lang='vi')
-	with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as f:
-		fpath = f.name
-		print fpath
-	tts.save(fpath)
-	speak(fpath)
-	os.remove(fpath)
+def speak_mp3(filePath):
+    subprocess.call(['omxplayer', filePath])
 
 class EspeakTTS:
         def speak(self, pharse):
@@ -51,9 +44,5 @@ class OnlineTTS:
         str_pre =  stringify_children(pre[0]).strip()
         cmd = "mpg123 -f 393360 " + str_pre
         subprocess.call(cmd, shell=True)
-    def speak_wav(self, filePath):
-        subprocess.call(['aplay', filePath])
-    def speak_mp3(self, filePath):
-        subprocess.call(['omxplayer', filePath])
                 
                 

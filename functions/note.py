@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from evernote.api.client import EvernoteClient
+import evernote.edam.type.ttypes as Types
 
 def handle(mic, comamnd, profile):
 	"""

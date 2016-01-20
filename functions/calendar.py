@@ -4,6 +4,7 @@ import datetime
 import argparse
 import re
 
+from datetime import datetime
 from apiclient.discovery import build
 from oauth2client.file import Storage
 from oauth2client.client import AccessTokenRefreshError
@@ -62,6 +63,7 @@ service = build('calendar', 'v3', http=http)
 def getEventsInDay(profile, mic, date):
 	todayStartTime = str(date.strftime("%Y-%m-%d")) + "T00:00:00Z"
 	todayEndTime = str(date.strftime("%Y-%m-%d")) + "T23:59:59Z"
+	page_token = None
 	while True:
 
 		# Gets events from primary calender from each page in present day boundaries
@@ -81,7 +83,10 @@ def getEventsInDay(profile, mic, date):
 				#TODO: change time to text to tts
 				startMinute = str(startMinute)
 				startHour = str(startHour)
-				mic.speak(eventTitle + " lúc " + startHour + ":" + startMinute)
+				if int(startMinute) == 0:
+					mic.speak(eventTitle + " lúc " + startHour + " giờ.")
+				else:
+					mic.speak(eventTitle + " lúc " + startHour + " giờ " + startMinute + " phút.")
 
 			except KeyError, e:
 				print "Failed to convert value of event"
@@ -95,12 +100,12 @@ def handle(mic, comamnd, profile):
 
 	date = datetime.now()
 
-	if bool(re.search(u'HÔM NAY|HOOM NAY', text, re.IGNORECASE)):
-		getEvent(profile,mic, date)
-	elif bool(re.search(u'NGÀY MAI|NGAFY MAI', text, re.IGNORECASE)):
+	if bool(re.search(u'HÔM NAY|HOOM NAY', comamnd, re.IGNORECASE)):
+		getEventsInDay(profile,mic, date)
+	elif bool(re.search(u'NGÀY MAI|NGAFY MAI', comamnd, re.IGNORECASE)):
 		one_day = datetime.timedelta(days=1)
 		date = date + one_day
-		getEvent(profile,mic, date)
+		getEventsInDay(profile, mic, date)
 
 
 def isMatch(command):

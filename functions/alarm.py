@@ -11,7 +11,7 @@ def set_alarm(mic, hour, minute):
         currentMinute = datetime.now().minute
         if currentHour == int(hour) and currentMinute == int(minute):
             #choose WAV
-            print "ALARM"
+            #print "ALARM"
             #mic.get_tts().speak_mp3("/home/pi/Music/4b896ff9151263672609e9cb9cc04c00.mp3")
             break
         else:
@@ -31,14 +31,14 @@ def handle(mic, command, profile):
             hour = matchObj.group(1).encode("utf-8")
             minute = 0
         else:
-            mic.get_tts().speak("Thời gian bạn đặt chưa đúng")
+            mic.speak("Thời gian bạn đặt chưa đúng")
             return
 
     currentHour = datetime.now().hour
     currentMinute = datetime.now().minute
 
     if hour < currentHour or (hour == currentHour and minute < currentMinute):
-        mic.get_tts().speak("Thời gian bạn đặt chưa đúng")
+        mic.speak("Thời gian bạn đặt chưa đúng")
         return
 
     try:
