@@ -8,8 +8,7 @@ def handle(mic, comamnd, profile):
         response = "Bây giờ là %d giờ" % (now.hour)
     else:
         response = "Bây giờ là %d giờ %d phút" % (now.hour, now.minute)
-    response = "Bây giờ là %d giờ %d phút" % (now.hour, now.minute)
-    mic.speak(converter.find_num_and_replace(response))
+    mic.speak(response)
 
 def isMatch(command):
     return command == u"MẤY GIỜ RỒI" or command == "THOWFI GIAN"

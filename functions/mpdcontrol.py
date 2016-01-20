@@ -3,8 +3,6 @@ import logging
 import re
 import mpd
 
-from core import tts
-
 class MusicMode():
     def __init__(self, nickname, mic, mpdplayer):
         self._logger = logging.getLogger(__name__)
@@ -15,7 +13,7 @@ class MusicMode():
     def delegateInput(self, command):
 
     	if command == u"MỞ NHẠC" or command == "MOWR NHAJC":
-    		self.mic.say("Playing %s" % self.music.current_song())
+    		self.mic.speak("Playing %s" % self.music.current_song())
     		self.music.play()
     	elif command == u"DỪNG NHẠC" or command == "DUWFNG NHAJC":
     		self.music.stop()
@@ -111,9 +109,9 @@ class MPDPlayer():
 	def volume(self, level):
 		self.client.setvol(int(level))
 
-def handle(mic, command):
+def handle(mic, command, profile):
 
-	tts.espeak_tts("Đang lấy dữ liệu nhạc trên máy")
+	mic.speak("Đang lấy dữ liệu nhạc trên máy")
 	try:
 		mpdplayer = MPDPlayer()
 	except:

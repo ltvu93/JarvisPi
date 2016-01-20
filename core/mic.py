@@ -21,8 +21,9 @@ class Mic():
 	self.passive_stt = passive_stt
 	self.active_stt = active_stt
 	self.signal = Signal(24)
-	#choose tts here
-	self.speaker = tts.OnlineTTS()
+	#choose TTS here
+        self.speaker = tts.OnlineTTS()
+        
 
     def get_signal(self):
         return self.signal
@@ -30,6 +31,9 @@ class Mic():
     def speak(self, phrase):
         print converter.find_num_and_replace(phrase)
         self.speaker.speak(converter.find_num_and_replace(phrase))
+
+    def play_wav(self, filename):
+        self.speaker.speak_wav(apppath.get_resources(filename))
 
     def passiveListen_old(self, keyword):
         """
@@ -163,19 +167,22 @@ class Mic():
 
         return THRESHOLD
 	
-    def activeListen(self):
-	options = self.activeListenToAllOptions()
+    def activeListen(self, SAYYES = False):
+	options = self.activeListenToAllOptions(SAYYES)	
 	if options:
 	    return options[0]
 			
-    def activeListenToAllOptions(self):
+    def activeListenToAllOptions(self, SAYYES = True):
         """listen command of user when JarvisPi is called."""
 
 	THRESHOLD = self.fetchThreshold()
 
-        self.signal.stop_blink()
+        if SAYYES:
+            tts.speak(apppath.get_resources('yes.wav'))
+        else:
+            self.signal.stop_blink()
+            
 	self.signal.turn_on()
-	#tts.speak(apppath.get_resources('yes.wav'))
 
 	LISTEN_TIME = 12
 
@@ -216,5 +223,5 @@ class Mic():
             f.seek(0)
             
             transcrips = self.active_stt.get_value(f)
-            tts.speak(apppath.get_resources('beep.wav'))
+            self.speaker.speak_wav(apppath.get_resources('beep.wav'))
             return transcrips

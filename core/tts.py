@@ -49,9 +49,9 @@ class OnlineTTS:
         root =  html.fromstring(r.text)
         pre = root.findall(".//pre")
         str_pre =  stringify_children(pre[0]).strip()
-        cmd = "mpg123 -f 196680 " + str_pre
+        cmd = "mpg123 -f 393360 " + str_pre
         subprocess.call(cmd, shell=True)
-    def speak_long_sentence(self, filePath):
+    def speak_wav(self, filePath):
         subprocess.call(['aplay', filePath])
     def speak_mp3(self, filePath):
         subprocess.call(['omxplayer', filePath])

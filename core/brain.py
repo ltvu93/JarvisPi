@@ -42,4 +42,4 @@ class Brain():
 					return
 
 		#TODO: speak cannot understant commands
-		self.mic.get_tts().speak("Không tìm thấy lệnh")
+		self.mic.speak("Không tìm thấy lệnh")

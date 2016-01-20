@@ -10,24 +10,23 @@ def handle(mic, comamnd, profile):
 	"""
 
 	auth_token = profile['evernote']['token']
-    client = EvernoteClient(token=auth_token)
-    note_store = client.get_note_store()
+	client = EvernoteClient(token=auth_token)
+	note_store = client.get_note_store()
+	
+	note = Types.Note()
+	note.title = "Ghi chú trên JarvisPi"
+	mic.speak("Nội dung ghi chú là gì?")
+	content = mic.activeListen()
+	note.content = '<?xml version="1.0" encoding="UTF-8"?>'
+	note.content += '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">'
+	note.content += '<en-note>Note:<br/>'
+	note.content += ('%s' % content)
+	note.content += '</en-note>'
     
-    note = Types.Note()
-    note.title = "Ghi chú trên JarvisPi"
-	tts.espeak_tts("Nội dung ghi chú là gì?")
-    content = mic.activeListen()
-    note.content = '<?xml version="1.0" encoding="UTF-8"?>'
-    note.content += '<!DOCTYPE en-note SYSTEM ' \
-    '"http://xml.evernote.com/pub/enml2.dtd">'
-    note.content += '<en-note>Note:<br/>'
-    note.content += ('%s' % content)
-    note.content += '</en-note>'
-
-    created_note = note_store.createNote(note)
-    mic.speak("Ghi chú thành công")
+	created_note = note_store.createNote(note)
+	mic.speak("Ghi chú thành công")
 
     #TODO: Add funtions read notes
 
 def isMatch(command):
-    return command == u"GHI CHÚ"
+	return command == u"GHI CHÚ"

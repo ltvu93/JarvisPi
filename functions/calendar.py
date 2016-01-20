@@ -12,8 +12,6 @@ from oauth2client.tools import run_flow
 from oauth2client.tools import *
 from oauth2client import tools
 
-from core import tts
-
 client_id = '498869212568-9c77o8gpprokbfoeddi3mkjdg9bmbijg.apps.googleusercontent.com'
 client_secret = '_s81jR7w9RxZqx3QdbXyiATZ'
 
@@ -83,7 +81,7 @@ def getEventsInDay(profile, mic, date):
 				#TODO: change time to text to tts
 				startMinute = str(startMinute)
 				startHour = str(startHour)
-				mic.speak(print eventTitle + " lúc " + startHour + ":" + startMinute)
+				mic.speak(eventTitle + " lúc " + startHour + ":" + startMinute)
 
 			except KeyError, e:
 				print "Failed to convert value of event"
@@ -97,7 +95,7 @@ def handle(mic, comamnd, profile):
 
 	date = datetime.now()
 
-	if bool(re.search(u'HÔM NAY|HOOM NAY', text, re.IGNORECASE):
+	if bool(re.search(u'HÔM NAY|HOOM NAY', text, re.IGNORECASE)):
 		getEvent(profile,mic, date)
 	elif bool(re.search(u'NGÀY MAI|NGAFY MAI', text, re.IGNORECASE)):
 		one_day = datetime.timedelta(days=1)
@@ -106,4 +104,4 @@ def handle(mic, comamnd, profile):
 
 
 def isMatch(command):
-    return bool(re.search(ur'\bLỊCH TRÌNH|LIJCHTRIFNH\b', text, re.IGNORECASE))ja
+    return bool(re.search(ur'\bLỊCH TRÌNH|LIJCHTRIFNH\b', text, re.IGNORECASE))

@@ -31,12 +31,16 @@ def handle(mic, comamnd, profile):
 		while True:
 			mic.speak("Bạn có muốn tiếp tục hay không")
 			command = mic.activeListen()
-			if not command or command == u"CÓ" or command == "COS":
-                                mic.get_signal().turn_off()
-                                mic.get_signal().start_blink()
-                                return
+			
+			mic.get_signal().turn_off()
+			mic.get_signal().start_blink()
+			if not command:
+                                continue
+			elif command == u"CÓ" or command == "COS":
+                                break
                         elif command == u"KHÔNG" or command == u"KHOONG":
                                 mic.speak("Kết thúc đọc tin tức")
+                                mic.get_signal().stop_blink()
                                 return
 
 		#tts.online_speak("Kết thúc đọc tin tức")
