@@ -25,7 +25,7 @@ def handle(mic, comamnd, profile):
     note.content += '</en-note>'
 
     created_note = note_store.createNote(note)
-    tts.espeak_tts("Ghi chú thành công")
+    mic.speak("Ghi chú thành công")
 
     #TODO: Add funtions read notes
 

@@ -21,16 +21,16 @@ def handle(mic, comamnd, profile):
 	response += "Bộ nhớ hiện tại được sử dụng %s phần trăm." %memory_percent
 	response += "Ổ cứng hiện tại được sử dụng %s phần trăm." %disk_percent
 	'''
-	tts.espeak_tts("Tôi đang chạy hệ điều hành %s phiên bản %s." %(os, version))
+	mic.speak("Tôi đang chạy hệ điều hành %s phiên bản %s." %(os, version))
 	time.sleep(0.5)
-	tts.espeak_tts("Hệ thống tên %s và có CPU %s nhân." %(name, cores))
+	mic.speak("Hệ thống tên %s và có CPU %s nhân." %(name, cores))
 	time.sleep(0.5)
-	tts.espeak_tts("CPU hiện tại được sử dụng %s phần trăm." %cpu_percent)
+	mic.speak("CPU hiện tại được sử dụng %s phần trăm." %cpu_percent)
 	time.sleep(0.5)
-	tts.espeak_tts("Bộ nhớ hiện tại được sử dụng %s phần trăm." %memory_percent)
+	mic.speak("Bộ nhớ hiện tại được sử dụng %s phần trăm." %memory_percent)
 	time.sleep(0.5)
-	tts.espeak_tts("Ổ cứng hiện tại được sử dụng %s phần trăm." %disk_percent)
-	#tts.espeak_tts(response)
+	mic.speak("Ổ cứng hiện tại được sử dụng %s phần trăm." %disk_percent)
+	mic.speak(response)
 
 def isMatch(command):
     #return command == u"MÀY SAO RỒI"

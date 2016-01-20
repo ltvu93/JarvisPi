@@ -15,7 +15,7 @@ class Signal:
         GPIO.output(self.light, False)   
     
     def start_blink(self):
-        self.p.start(1)
+        self.p.start(50)
 
     def stop_blink(self):
         self.p.stop()

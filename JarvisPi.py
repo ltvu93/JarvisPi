@@ -4,7 +4,9 @@ import sys
 import yaml
 
 from core import apppath
-from mic import Mic
+from core import mic
+from core import stt
+
 from core.conversation import Conversation
 
 class JarvisPi():
@@ -20,18 +22,19 @@ class JarvisPi():
 			self.logger.error("Cannot read profile information '%s'.", profile_path)
 		
 		#New passive_stt
-		passive_stt = PocketSphinxSTT()
+		passive_stt = stt.PocketSphinxSTT()
 		
 		#New active_stt
-		if profile["stt"]["name"] == "pocketsphinx":
+		if self.profile["stt"]["name"] == "pocketsphinx":
 			active_stt = PocketSphinxSTT("active")
-		elif profile["stt"]["name"] == "google":
-			active_stt = GoogleSTT()
+		elif self.profile["stt"]["name"] == "google":
+			active_stt = stt.GoogleSTT()
 		
-		self.mic = Mic(passive_stt, active_stt)
+		self.mic = mic.Mic(passive_stt, active_stt)
 
 	def run(self):
 		conversation = Conversation("BI", self.mic, self.profile)
+		
 		conversation.handleForever()
 
 if __name__ == "__main__":
@@ -39,7 +42,8 @@ if __name__ == "__main__":
 
 	try:
 		app = JarvisPi()
-	except Exception:
+	except Exception, e:
+                print str(e)
 		sys.exit(1)
 
 	app.run()

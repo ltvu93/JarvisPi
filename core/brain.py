@@ -5,11 +5,12 @@ import pkgutil
 import tts
 
 class Brain():
-	def __init__(self, mic, signal):
+	def __init__(self, mic, profile):
 		self.logger = logging.getLogger(__name__)
-		self.functions  = self.getFunctions()
+		self.profile = profile
 		self.mic = mic
-		self.signal = signal
+		self.signal = mic.get_signal()
+		self.functions  = self.getFunctions()
 
 	def getFunctions(self):
 		"""Get all functions available of JarvisPi"""

@@ -9,7 +9,7 @@ def handle(mic, comamnd, profile):
     else:
         response = "Bây giờ là %d giờ %d phút" % (now.hour, now.minute)
     response = "Bây giờ là %d giờ %d phút" % (now.hour, now.minute)
-    mic.get_tts().speak(converter.find_num_and_replace(response))
+    mic.speak(converter.find_num_and_replace(response))
 
 def isMatch(command):
     return command == u"MẤY GIỜ RỒI" or command == "THOWFI GIAN"

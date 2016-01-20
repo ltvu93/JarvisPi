@@ -22,7 +22,7 @@ class STT:
 		return ""
 
 class GoogleSTT(STT):
-	def _regenerate_request_url():
+	def _regenerate_request_url(self):
 		query = urllib.urlencode({'output': 'json',
 								'client': 'chromium',
 								'lang': 'vi',
@@ -83,7 +83,7 @@ class PocketSphinxSTT(STT):
 		
 		if(mode == 'passive'):
 			config.set_string('-keyphrase', 'bi')
-			config.set_float('-kws_threshold', 1e-10)		
+			config.set_float('-kws_threshold', 1e-25)		
 		else:
 			config.set_string('-lm', lmd)
 			config.set_string('-logfn', '/dev/null')
@@ -96,10 +96,14 @@ class PocketSphinxSTT(STT):
 		
 		while True:
 			buf = stream.read(1024)
-			decoder.process_raw(buf, False, False)
-			if decoder.hyp() != None and decoder.hyp().hypstr == keyword.lower():
-				self.logger.info("Detected keyword: " + keyword)
-				decoder.end_utt()
+			self.decoder.process_raw(buf, False, False)
+			if self.decoder.hyp() != None and self.decoder.hyp().hypstr == keyword.lower():
+				#self.logger.info("Detected keyword: " + keyword)
+                                #print "Detected keyword: " + keyword
+				self.decoder.end_utt()
+				stream.stop_stream()
+				stream.close()
+				return
 		
 	def get_value(self, fp):
 		result = []
@@ -110,7 +114,7 @@ class PocketSphinxSTT(STT):
 		hyp = decoder.hyp()
 		try:
 			if hyp.hypstr != "":
-			result.append(hyp.hypstr.upper())
+                                result.append(hyp.hypstr.upper())
 		except AttributeError:
 			print "Can not regconize anything. Please speak again"
 			pass

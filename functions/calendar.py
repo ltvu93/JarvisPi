@@ -70,7 +70,7 @@ def getEventsInDay(profile, mic, date):
 		events = service.events().list(calendarId='primary', pageToken=page_token, timeMin=todayStartTime, timeMax=todayEndTime).execute() 
 		
 		if(len(events['items']) == 0):
-			print "Bạn không có lịch hôm nay"
+			mic.speak("Bạn không có lịch hôm nay")
 			return
 
 		for event in events['items']:
@@ -83,7 +83,7 @@ def getEventsInDay(profile, mic, date):
 				#TODO: change time to text to tts
 				startMinute = str(startMinute)
 				startHour = str(startHour)
-				print eventTitle + " lúc " + startHour + ":" + startMinute
+				mic.speak(print eventTitle + " lúc " + startHour + ":" + startMinute)
 
 			except KeyError, e:
 				print "Failed to convert value of event"

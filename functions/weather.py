@@ -51,7 +51,7 @@ def handle(mic, comamnd, profile):
 		response = "Hôm nay %s, " % weather_desc
 		response += "nhiệt độ trung bình %d độ xê, " % temp
 		response += "độ ẩm %d phần trăm" % humidity
-		mic.get_tts().speak(converter.find_num_and_replace(response))
+		mic.speak(converter.find_num_and_replace(response))
 
 
 def isMatch(command):

@@ -15,32 +15,29 @@ def handle(mic, comamnd, profile):
 
 		rssTitle = data['feed']['title'].encode('utf-8')
 	except:
-		mic.get_tts().speak("Kết nối mạng có vấn đề.      ")
-		mic.get_tts().speak("Vui lòng thử lại.      ")
+		mic.speak("Kết nối mạng có vấn đề.      ")
+		mic.speak("Vui lòng thử lại.      ")
 		return
-	mic.get_tts().speak(rssTitle)
+	print rssTitle
+	mic.speak(rssTitle)
 
 	for post in data.entries:
 		title = post.title.encode('utf-8')
 		summmary = getTruePostSummary(post.summary.encode('utf-8'))
 		#link = post.link
 
-		mic.get_tts().speak(converter.find_num_and_replace(title + ". " + summmary))
+		mic.speak(title + "      " + summmary)
 		
 		while True:
-			mic.get_tts().speak("Bạn có muốn tiếp tục hay không")
-			commands = mic.activeListen()
-			if commands:
-				if any(command == u"CÓ" for command in commands):
-					break
-				elif any(command == "COS" for command in commands):
-					break
-				elif any(command == u"KHÔNG" for command in commands):
-                                        mic.get_tts().speak("Kết thúc đọc tin tức")
-					return
-				elif any(command == u"KHOONG" for command in commands):
-                                        mic.get_tts().speak("Kết thúc đọc tin tức")
-					return
+			mic.speak("Bạn có muốn tiếp tục hay không")
+			command = mic.activeListen()
+			if not command or command == u"CÓ" or command == "COS":
+                                mic.get_signal().turn_off()
+                                mic.get_signal().start_blink()
+                                return
+                        elif command == u"KHÔNG" or command == u"KHOONG":
+                                mic.speak("Kết thúc đọc tin tức")
+                                return
 
 		#tts.online_speak("Kết thúc đọc tin tức")
 
