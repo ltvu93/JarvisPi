@@ -3,7 +3,6 @@ import re
 import imaplib
 import email
 
-from core import tts
 
 USERNAME = 'shiva9u1@gmail.com'
 PASSWORD = 'sonyuhshidae93'
@@ -59,22 +58,22 @@ def handle(mic, comamnd, profile):
 	try:
 		msgs = getUnreadEmails(limit = 5)
 	except imaplib.IMAP4.error:
-		mic.get_tts().speak("Đăng nhập vào gmail thất bại")
+		mic.speak("Đăng nhập vào hộp thư thất bại")
 		return
 
 	if isinstance(msgs, int):
-		respond = "Bạn có %d email chưa đọc" % msgs
-		mic.get_tts().speak(respond)
+		respond = "Bạn có %d thư chưa đọc" % msgs
+		mic.speak(respond)
 		return
 
 	senders = [getSender(msg) for msg in msgs]
 
 	if not senders:
-		mic.get_tts().speak("Bạn không có email mới")
+		mic.speak("Bạn không có thư mới")
 	elif len(senders) == 1:
-		mic.get_tts().speak("Bạn có 1 email mới từ %s", senders[0])
+		mic.speak("Bạn có 1 thư mới từ %s", senders[0])
 	else:
-		response = "Bạn có %d email mới " % len(senders)
+		response = "Bạn có %d thư mới " % len(senders)
 		unique_senders = list(set(senders))
 		if len(unique_senders) > 1:
 			response += " từ "
@@ -82,7 +81,7 @@ def handle(mic, comamnd, profile):
 		else:
 			response += "từ %s" % unique_senders[0]
 
-		mic.get_tts().speak(response)
+		mic.speak(response)
 
 def isMatch(command):
-	return bool(re.search(r"\bGMAIL\b", command, re.IGNORECASE)) or bool(re.search(r"\bHOOJP THUW\b", command, re.IGNORECASE))
+	return bool(re.search(ur"\bGMAIL\b", command, re.IGNORECASE)) or bool(re.search(r"\bHOOJP THUW\b", command, re.IGNORECASE))

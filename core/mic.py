@@ -3,7 +3,7 @@ import pyaudio    # interact with micro
 import tempfile   # interact with temp file
 import wave       # save file audio
 import audioop    # interact with raw data audio, get RMS
-
+import time
 import apppath
 import tts
 import converter
@@ -117,7 +117,7 @@ class Mic():
         - THRESHOLD if listened keyword
         - None if don't
         """
-        self.signal.turn_off()
+        #self.signal.turn_off()
         
         # new audio stream
         stream = self.audio.open(format=FORMAT,channels=CHANNELS,rate=RATE,input=True,frames_per_buffer=CHUNK)
@@ -168,38 +168,33 @@ class Mic():
         return THRESHOLD
 	
     def activeListen(self, SAYYES = False):
-	options = self.activeListenToAllOptions(SAYYES)	
-	if options:
-	    return options[0]
+		options = self.activeListenToAllOptions(SAYYES)	
+		if options:
+			return options[0]
 			
     def activeListenToAllOptions(self, SAYYES = True):
         """listen command of user when JarvisPi is called."""
-
-	THRESHOLD = self.fetchThreshold()
-
+        THRESHOLD = self.fetchThreshold()
         if SAYYES:
+            
             tts.speak(apppath.get_resources('yes.wav'))
         else:
             self.signal.stop_blink()
-            
-	self.signal.turn_on()
-
-	LISTEN_TIME = 12
-
+        
+        self.signal.turn_on()
+        
+        
+        LISTEN_TIME = 12
         # prepare recording stream
         stream = self.audio.open(format=pyaudio.paInt16,channels=1,rate=RATE,input=True,frames_per_buffer=CHUNK)
-
         frames = []
             # increasing the range # results in longer pause after command
             # generation
         lastN = [THRESHOLD * 1.2 for i in range(30)]
-
         for i in range(0, RATE / CHUNK * LISTEN_TIME):
-
             data = stream.read(CHUNK)
             frames.append(data)
             score = self.getScore(data)
-
             lastN.pop(0)
             lastN.append(score)
 
@@ -208,11 +203,10 @@ class Mic():
             # TODO: 0.8 should not be a MAGIC NUMBER!
             if average < THRESHOLD * 0.8:
                 break
-
+        
         # save the audio data
         stream.stop_stream()
         stream.close()
-
         with tempfile.SpooledTemporaryFile(mode='w+b') as f:
             wav_fp = wave.open(f, 'wb')
             wav_fp.setnchannels(CHANNELS)
@@ -224,4 +218,5 @@ class Mic():
             
             transcrips = self.active_stt.get_value(f)
             self.speaker.speak_wav(apppath.get_resources('beep.wav'))
+            self.signal.turn_off()
             return transcrips

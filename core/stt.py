@@ -39,9 +39,9 @@ class GoogleSTT(STT):
 
 		urls = self._regenerate_request_url()
 		headers = {'content-type': 'audio/l16; rate=%s' % frame_rate}
-		r = requests.post(urls, data = data, headers = headers)
-
+		
 		try:
+			r = requests.post(urls, data = data, headers = headers)
 			r.raise_for_status()
 		except requests.exceptions.HTTPError:
 			print 'Request failed with http status %d' % r.status_code
@@ -83,7 +83,7 @@ class PocketSphinxSTT(STT):
 		
 		if(mode == 'passive'):
 			config.set_string('-keyphrase', 'bi')
-			config.set_float('-kws_threshold', 1e-25)		
+			config.set_float('-kws_threshold', 1e-10)		
 		else:
 			config.set_string('-lm', lmd)
 			config.set_string('-logfn', '/dev/null')

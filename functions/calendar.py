@@ -104,4 +104,4 @@ def handle(mic, comamnd, profile):
 
 
 def isMatch(command):
-    return bool(re.search(ur'\bLỊCH TRÌNH|LIJCHTRIFNH\b', text, re.IGNORECASE))
+    return bool(re.search(ur'\bLỊCH TRÌNH|LIJCH TRIFNH\b', command, re.IGNORECASE))

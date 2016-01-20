@@ -37,3 +37,5 @@ class Conversation():
 			if commands:
 				print commands
 				self.brain.process(commands)
+			else:
+                                self.mic.speak("Không nghe rõ lệnh")

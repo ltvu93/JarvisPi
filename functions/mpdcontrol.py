@@ -12,51 +12,49 @@ class MusicMode():
 
     def delegateInput(self, command):
 
-    	if command == u"MỞ NHẠC" or command == "MOWR NHAJC":
-    		self.mic.speak("Playing %s" % self.music.current_song())
+    	if command == u"BẬT NHẠC" or command == "BAAJT NHAJC":
+    		#self.mic.speak("Playing %s" % self.music.current_song())
     		self.music.play()
+    		return
     	elif command == u"DỪNG NHẠC" or command == "DUWFNG NHAJC":
     		self.music.stop()
-    	elif command == "PAUSE":
-    		player.pause(1)
-    	elif command == "RESUME":
-    		player.pause(0)
-    	elif command == "NEXT":
+    		return
+    	elif command == u"TIẾP THEO":
     		self.music.play()
-    		player.next()
-    	elif command == "PREVIOUS":
+    		self.music.next()
+    		return
+    	elif command == u"LÙI LẠI":
     		self.music.play()
-    		player.previous()
-    	elif command == u"TĂNG ÂM LƯỢNG NHẠC" or command == "TAWNG AAM LUWOWNG NHAJC":
-    		player.volume(interval=10)
-    		self.music.play()
-    	elif command == u"GIẢM ÂM LƯỢNG NHẠC" or command == "GIARM AAM LUWOWNG NHAJC":
-    		player.volume(interval=-10)
-    		self.music.play()
+    		self.music.previous()
+    		return
+
+    	self.music.play()
+    	self.mic.speak("Không tìm thấy lệnh")
 
     def handleForever(self):
 
         self.music.play()
         #self.mic.say("Đang chơi bài %s" % self.music.current_song())
-
         while True:
 
-            threshold, transcribed = self.mic.passiveListen(self.nickname)
-
-            if not transcribed or not threshold:
-                self._logger.info("Nothing has been said or transcribed.")
-                continue
+            #Listen keyword to wake up JarvisPi in music mode
+            self.mic.passiveListen(self.nickname)
 
             self.music.pause()
-
+            
+            #Listen music mode command
             command = self.mic.activeListen()
+            
+            self.mic.get_signal().start_blink()
 
             if command:
-                if "DỪNG NHẠC" in command:
+                if command == u"TẮT NHẠC":
+                    self.mic.get_signal().stop_blink()
+                    #TODO: reset lai mpd player.
                     return
                 self.delegateInput(command)
             else:
-                self.mic.say("Không nghe rõ lệnh?")
+                self.mic.speak("Không nghe rõ lệnh")
                 self.music.play()
 
 class Song():
@@ -69,7 +67,7 @@ class MPDPlayer():
 	def __init__(self):
 		self.client = mpd.MPDClient()
 		self.client.use_unicode = True
-		self.client.timeout = None
+		self.client.timeout = 10
 		self.client.idletimeout = None
 
 		self.client.connect("localhost", 6600)
@@ -105,6 +103,9 @@ class MPDPlayer():
 
 	def stop(self):
 		self.client.stop()
+		
+	def pause(self):
+		self.client.pause()
 
 	def volume(self, level):
 		self.client.setvol(int(level))
@@ -115,11 +116,11 @@ def handle(mic, command, profile):
 	try:
 		mpdplayer = MPDPlayer()
 	except:
-		mic.say("Không thể lấy dữ liệu nhạc trên máy")
-	print "Đang vào chế độ nghe nhạc"
+		mic.speak("Không thể lấy dữ liệu nhạc trên máy")
+	mic.speak("Đang vào chế độ nghe nhạc")
 	music_mode = MusicMode("Bi", mic, mpdplayer)
 	music_mode.handleForever()
-	print "Thoát chế độ nghe nhạc"
+	mic.speak("Thoát chế độ nghe nhạc")
 
 def isMatch(command):
 	return bool(re.search(ur"\NHẠC|NHACJC\b", command, re.IGNORECASE))

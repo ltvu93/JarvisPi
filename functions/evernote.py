@@ -1,5 +1,4 @@
 # coding: utf-8
-from core import tts
 
 from evernote.api.client import EvernoteClient
 

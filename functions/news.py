@@ -1,7 +1,7 @@
 # coding: utf-8
 import re
 import feedparser 		#https://wiki.python.org/moin/RssLibraries
-
+import time
 from core import converter
 
 def getTruePostSummary(summary):
@@ -19,14 +19,16 @@ def handle(mic, comamnd, profile):
 		mic.speak("Vui lòng thử lại.      ")
 		return
 	print rssTitle
-	mic.speak(rssTitle)
+        #mic.speak("")
 
 	for post in data.entries:
 		title = post.title.encode('utf-8')
 		summmary = getTruePostSummary(post.summary.encode('utf-8'))
 		#link = post.link
-
-		mic.speak(title + "      " + summmary)
+                
+		mic.speak(title)
+		#time.sleep(0.5)
+		mic.speak(summmary)
 		
 		while True:
 			mic.speak("Bạn có muốn tiếp tục hay không")
