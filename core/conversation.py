@@ -4,6 +4,7 @@ import os
 import tts
 import apppath
 
+from core import tts
 from signal import Signal
 from brain import Brain
 from stt import *
@@ -38,4 +39,4 @@ class Conversation():
 				print commands
 				self.brain.process(commands)
 			else:
-                                self.mic.speak("Không nghe rõ lệnh")
+                                tts.speak_wav("khong_nghe_ro_lenh.wav")

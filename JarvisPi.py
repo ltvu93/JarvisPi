@@ -20,13 +20,13 @@ class JarvisPi():
 				self.profile = yaml.load(f)
 		except OSError:
 			self.logger.error("Cannot read profile information '%s'.", profile_path)
-		
 		#New passive_stt
 		passive_stt = stt.PocketSphinxSTT()
 		
+		
 		#New active_stt
 		if self.profile["stt"]["name"] == "pocketsphinx":
-			active_stt = PocketSphinxSTT("active")
+			active_stt = stt.PocketSphinxSTT("active")
 		elif self.profile["stt"]["name"] == "google":
 			active_stt = stt.GoogleSTT()
 		

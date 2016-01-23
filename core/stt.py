@@ -16,6 +16,8 @@ from pocketsphinx import *
 hmdir = apppath.RESOURCES_PATH + "/model_parameters/jarvispi.cd_cont_200"
 lmd   = apppath.RESOURCES_PATH + "/etc/jarvispi.lm.DMP"
 dictd = apppath.RESOURCES_PATH + "/etc/jarvispi.dic"
+hmdir_bi = apppath.RESOURCES_PATH + "/bi_model/model_parameters/jarvispi.cd_cont_200"
+dictd_bi = apppath.RESOURCES_PATH + "/bi_model/etc/jarvispi.dic"
 
 class STT:
 	def get_value(self):
@@ -78,13 +80,15 @@ class PocketSphinxSTT(STT):
 		self.logger = logging.getLogger(__name__)
 		
 		config = Decoder.default_config()
-		config.set_string('-hmm', hmdir)
-		config.set_string('-dict', dictd)
 		
 		if(mode == 'passive'):
-			config.set_string('-keyphrase', 'bi')
-			config.set_float('-kws_threshold', 1e-10)		
+                        config.set_string('-hmm', hmdir_bi)
+                        config.set_string('-dict', dictd_bi)
+			config.set_string('-keyphrase', "bi")
+			config.set_float('-kws_threshold', 1e-20)		
 		else:
+                        config.set_string('-hmm', hmdir)
+                        config.set_string('-dict', dictd)
 			config.set_string('-lm', lmd)
 			config.set_string('-logfn', '/dev/null')
 
@@ -108,13 +112,14 @@ class PocketSphinxSTT(STT):
 	def get_value(self, fp):
 		result = []
 		data = fp.read()
-		decoder.start_utt()
-		decoder.process_raw(data, False, False)
-		decoder.end_utt()
-		hyp = decoder.hyp()
+		self.decoder.start_utt()
+		self.decoder.process_raw(data, False, False)
+		self.decoder.end_utt()
+		hyp = self.decoder.hyp()
 		try:
-			result = [seg.word for seg in decoder.seg()]
+			if self.decoder.hyp().hypstr != "":
+				result.append(self.decoder.hyp().hypstr.upper())
 		except AttributeError:
 			print "Can not regconize anything. Please speak again"
 			pass
-			return result
+		return result

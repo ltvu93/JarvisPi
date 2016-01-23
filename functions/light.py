@@ -1,5 +1,6 @@
 # coding: utf-8
 import RPi.GPIO as GPIO 		  #https://pythonhosted.org/GPIO/
+from core import tts
 
 LIGHT_ONE = 17
 #LIGHT_TWO = 27
@@ -12,11 +13,11 @@ def handle(mic, command, profile):
 	if command == u"BẬT ĐÈN" or command == "BAAJT DDEFN":
 		GPIO.output(LIGHT_ONE, GPIO.LOW)
 		#GPIO.output(LIGHT_TWO, GPIO.LOW)
-		mic.speak("Đã bật đèn")
+		tts.speak_wav("da_bat_den.wav")
 	elif command == u"TẮT ĐÈN" or command == "TAWST DDEFN":
 		GPIO.output(LIGHT_ONE, GPIO.HIGH)
 		#GPIO.output(LIGHT_TWO, GPIO.HIGH)
-		mic.speak("Đã tắt đèn")
+		tts.speak_wav("da_tat_den.wav")
 
 def isMatch(command):
 	return command == u"BẬT ĐÈN" or command == u"TẮT ĐÈN" or command == "BAAJT DDEFN" or command == "TAWST DDEFN"

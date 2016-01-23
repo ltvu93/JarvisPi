@@ -3,6 +3,7 @@ import re
 import imaplib
 import email
 
+from core import tts
 
 USERNAME = 'shiva9u1@gmail.com'
 PASSWORD = 'sonyuhshidae93'
@@ -58,7 +59,7 @@ def handle(mic, comamnd, profile):
 	try:
 		msgs = getUnreadEmails(limit = 5)
 	except imaplib.IMAP4.error:
-		mic.speak("Đăng nhập vào hộp thư thất bại")
+		tts.speak_wav("dang_nhap_gmail_that_bai.wav")
 		return
 
 	if isinstance(msgs, int):
@@ -69,7 +70,7 @@ def handle(mic, comamnd, profile):
 	senders = [getSender(msg) for msg in msgs]
 
 	if not senders:
-		mic.speak("Bạn không có thư mới")
+		tts.speak_wav("ban_khong_co_thu_moi.wav")
 	elif len(senders) == 1:
 		mic.speak("Bạn có 1 thư mới từ %s", senders[0])
 	else:
@@ -84,4 +85,4 @@ def handle(mic, comamnd, profile):
 		mic.speak(response)
 
 def isMatch(command):
-	return bool(re.search(ur"\bGMAIL\b", command, re.IGNORECASE)) or bool(re.search(r"\bHOOJP THUW\b", command, re.IGNORECASE))
+	return bool(re.search(ur"\bCẬP NHẬT HỘP THƯ\b", command, re.IGNORECASE)) or bool(re.search(r"\bHOOJP THUW\b", command, re.IGNORECASE))

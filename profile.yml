@@ -7,6 +7,6 @@ openweathermap:
 gg_stt:
     key: AIzaSyARC6Vdp5i_A4d9g_5hiLydjr2jbjCmf2s
 stt:
-    name: google
+    name: pocketsphinx
 evernote:
     token: S=s1:U=91f3b:E=159982248ac:C=152407119a0:P=1cd:A=en-devtoken:V=2:H=0b51c42a3ef01d5cd7128e9b42f7954a

@@ -1,6 +1,7 @@
 # coding: utf-8
 import os
 import tempfile
+import apppath
 import subprocess
 from gtts import gTTS
 import requests
@@ -16,8 +17,12 @@ def stringify_children(node):
     # filter removes possible Nones in texts and tails
     return ''.join(filter(None, parts))
 
-def speak_wav(*filePath):
-    subprocess.call(['aplay', filePath])
+def speak_wav(*fileNames):
+    cmd = ['aplay']
+    print fileNames
+    for name in fileNames:
+        cmd.append(apppath.get_resources(name))
+    subprocess.call(cmd)
 def speak_mp3(filePath):
     subprocess.call(['omxplayer', filePath])
 

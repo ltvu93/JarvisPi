@@ -5,7 +5,8 @@ import urllib
 import urlparse
 import requests
 import json
-from core import converter
+
+from core import utils
 
 
 def _generate_weather_url():
@@ -51,7 +52,7 @@ def handle(mic, comamnd, profile):
 		response = "Hôm nay %s, " % weather_desc
 		response += "nhiệt độ trung bình %d độ xê, " % temp
 		response += "độ ẩm %d phần trăm" % humidity
-		mic.speak(converter.find_num_and_replace(response))
+		mic.speak(response)
 
 
 def isMatch(command):

@@ -4,6 +4,7 @@ import datetime
 import argparse
 import re
 
+from core import tts
 from datetime import datetime
 from apiclient.discovery import build
 from oauth2client.file import Storage
@@ -70,7 +71,7 @@ def getEventsInDay(profile, mic, date):
 		events = service.events().list(calendarId='primary', pageToken=page_token, timeMin=todayStartTime, timeMax=todayEndTime).execute() 
 		
 		if(len(events['items']) == 0):
-			mic.speak("Bạn không có lịch hôm nay")
+			tts.speak_wav("ban_khong_co_lich_hom_nay.wav")
 			return
 
 		for event in events['items']:

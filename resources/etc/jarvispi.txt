@@ -1,26 +1,41 @@
 <s> bi </s>
 <s> baajt ddefn </s>
 <s> tawst ddefn </s>
+<s> baajt quajt </s>
+<s> tawst quajt </s>
 <s> thowfi tieest </s>
-<s> tin tuwsc </s>
 <s> thowfi gian </s>
+<s> tin tuwsc </s>
+<s> tin tuwsc theer thao </s>
+<s> tin tuwsc khoa hojc </s>
+<s> baay giowf laf maasy giowf </s>
+<s> lijch trifnh hoom nay </s>
+<s> lijch trifnh ngafy mai </s>
+<s> caajp nhaajt hoojp thuw </s>
+<s> baajt nhajc </s>
+<s> duwfng nhajc </s>
+<s> tieesp theo </s>
+<s> lufi laji </s>
+<s> tawst nhajc </s>
+<s> duwfng laji </s>
+<s> theem ghi chus </s>
 <s> cos </s>
 <s> khoong </s>
-<s> trajng thasi asnh sasng </s>
-<s> trajng thasi vaajn hafnh </s>
-<s> hoojp thuw </s>
-<s> bajt nhajc </s>
-<s> tawst nhajc </s>
-<s> bajt quajt </s>
-<s> tawst quajt </s>
-<s> bajt masy lajnh </s>
-<s> tawst masy lajnh </s>
-<s> majng xax hooji </s>
-<s> nhawc nhowr </s>
-<s> camera truowc coorng </s>
-<s> camera sau </s>
-<s> sajc ddieejn thoaji </s>
-<s> giarm ddooj sasng ddefn </s>
-<s> tawng ddooj sasng ddefn </s>
-<s> tawng nhieejt ddooj </s>
-<s> giarm nhieejt ddooj </s>
+<s> thowfi tieest hoom nay thees nafo </s>
+<s> dajt baso thuwsc lusc muowfi moojt giowf ba muowi phust </s>
+<s> phast taast car </s>
+<s> phast nhajc cuar tieen tieen </s>
+<s> phast nhajc cuar thu minh </s>
+<s> thoong tin majng xax hooji </s>
+<s> phast nhajc cuar vy oanh </s>
+<s> phast nhajc cuar tieen tieen </s>
+<s> caajp nhaajt majng xax hooji </s>
+<s> chia ser trajng thasi </s>
+<s> bi laf gif </s>
+<s> bi bao nhieeu tuoori </s>
+<s> bi laf con trai hay con gasi </s>
+<s> chia ser nhajc </s>
+<s> thoong tin veef thieest bij </s>
+<s> chujp arnh tuwj suownsg </s>
+<s> chia ser arnh </s>
+<s> coong vieejc hawfng ngafy </s>

@@ -15,7 +15,8 @@ def handle(mic, comamnd, profile):
 	
 	note = Types.Note()
 	note.title = "Ghi chú trên JarvisPi"
-	mic.speak("Nội dung ghi chú là gì?")
+	#mic.speak("Nội dung ghi chú là gì?")
+	tts.speak_wav("noi_dung_ghi_chu_la_gi.wav")
 	content = mic.activeListen()
 	note.content = '<?xml version="1.0" encoding="UTF-8"?>'
 	note.content += '<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">'
@@ -24,9 +25,10 @@ def handle(mic, comamnd, profile):
 	note.content += '</en-note>'
     
 	created_note = note_store.createNote(note)
-	mic.speak("Ghi chú thành công")
+	#mic.speak("Ghi chú thành công")
+	tts.speak_wav("ghi_chu_thanh_cong.wav")
 
     #TODO: Add funtions read notes
 
 def isMatch(command):
-	return command == u"GHI CHÚ"
+	return command == u"GHI CHÚ" or command == r"THEEM GHI CHUS"

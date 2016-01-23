@@ -9,17 +9,17 @@
 ===============  This file was produced by the CMU-Cambridge  ===============
 ===============     Statistical Language Modeling Toolkit     ===============
 =============================================================================
-This is a 3-gram language model, based on a vocabulary of 42 words,
-  which begins "</s>", "<s>", "asnh"...
+This is a 3-gram language model, based on a vocabulary of 87 words,
+  which begins "</s>", "<s>", "arnh"...
 This is a CLOSED-vocabulary model
   (OOVs eliminated from training data and are forbidden in test data)
 Good-Turing discounting was applied.
-1-gram frequency of frequency : 24 
-2-gram frequency of frequency : 52 13 1 2 0 0 0 
-3-gram frequency of frequency : 77 13 1 2 0 0 0 
-1-gram discounting ratios : 0.00 
-2-gram discounting ratios : 0.47 0.06 
-3-gram discounting ratios : 0.31 0.08 
+1-gram frequency of frequency : 53 
+2-gram frequency of frequency : 102 19 7 4 1 0 0 
+3-gram frequency of frequency : 143 19 8 3 1 0 0 
+1-gram discounting ratios : 0.98 
+2-gram discounting ratios : 0.34 0.53 0.75 0.28 
+3-gram discounting ratios : 0.24 0.62 0.48 0.40 
 This file is in the ARPA-standard format introduced by Doug Paul.
 
 p(wd3|wd1,wd2)= if(trigram exists)           p_3(wd1,wd2,wd3)
@@ -48,218 +48,409 @@ p_3     wd_1 wd_2 wd_3
 end of data mark: \end\
 
 \data\
-ngram 1=42
-ngram 2=69
-ngram 3=93
+ngram 1=87
+ngram 2=134
+ngram 3=174
 
 \1-grams:
--0.5563 </s>	-1.2669
--0.5393 <s>	-0.1729
--99.9990 asnh	-0.2605
--99.9990 baajt	-0.2555
--1.4771 bajt	-0.2453
--99.9990 bi	-0.1339
--1.6532 camera	-0.2752
--99.9990 coorng	-0.1339
--99.9990 cos	-0.1339
--1.3522 ddefn	-0.6368
--99.9990 ddieejn	-0.2752
--1.4771 ddooj	0.0664
--99.9990 gian	-0.1339
--1.6532 giarm	-0.2504
--99.9990 hafnh	-0.1339
--99.9990 hooji	-0.1339
--99.9990 hoojp	-0.2752
--99.9990 khoong	-0.1339
--1.6532 lajnh	0.1139
--99.9990 majng	-0.2752
--1.6532 masy	-0.0177
--1.6532 nhajc	0.1139
--99.9990 nhawc	-0.2752
--1.6532 nhieejt	-0.0127
--99.9990 nhowr	-0.1339
--1.6532 quajt	0.1139
--99.9990 sajc	-0.2752
--1.4771 sasng	0.0735
--99.9990 sau	-0.1339
--1.6532 tawng	-0.2504
--1.3522 tawst	-0.2241
--1.6532 thasi	-0.2752
--99.9990 thoaji	-0.1339
--1.6532 thowfi	-0.2752
--99.9990 thuw	-0.1339
--99.9990 tieest	-0.1339
--99.9990 tin	-0.2752
--1.6532 trajng	-0.0177
--99.9990 truowc	-0.2752
--99.9990 tuwsc	-0.1339
--99.9990 vaajn	-0.2752
--99.9990 xax	-0.2752
+-0.7443 </s>	-1.5241
+-0.7336 <s>	-0.3062
+-2.0453 arnh	-0.0920
+-2.3545 ba	-0.1787
+-1.8692 baajt	-0.1565
+-2.3545 baay	-0.1747
+-2.3545 bao	-0.1787
+-2.3545 baso	-0.1787
+-1.7443 bi	-0.1520
+-2.3545 bij	-0.0943
+-2.0453 caajp	-0.3236
+-2.3545 car	-0.0943
+-1.8692 chia	-0.5955
+-2.3545 chujp	-0.1767
+-2.3545 chus	-0.0943
+-2.0453 con	-0.1767
+-2.3545 coong	-0.1787
+-2.3545 cos	-0.0943
+-1.7443 cuar	-0.2360
+-2.3545 dajt	-0.1787
+-2.0453 ddefn	-0.2412
+-2.0453 duwfng	-0.1606
+-2.3545 gasi	-0.0943
+-2.3545 ghi	-0.1787
+-2.3545 gian	-0.0943
+-2.3545 gif	-0.0943
+-1.8692 giowf	-0.0847
+-2.3545 hawfng	0.0000
+-2.3545 hay	-0.1767
+-2.3545 hojc	-0.0943
+-2.0453 hooji	-0.2412
+-2.3545 hoojp	-0.1787
+-2.0453 hoom	-0.3236
+-2.3545 khoa	-0.1787
+-2.3545 khoong	-0.0943
+-1.8692 laf	-0.1728
+-2.0453 laji	-0.2412
+-2.0453 lijch	-0.3236
+-2.3545 lufi	-0.1767
+-2.3545 lusc	-0.1787
+-2.3545 maasy	-0.1747
+-2.3545 mai	-0.0943
+-2.0453 majng	-0.3236
+-2.3545 minh	-0.0943
+-2.3545 moojt	-0.1747
+-2.3545 muowfi	-0.1787
+-2.3545 muowi	-0.1787
+-2.3545 nafo	-0.0943
+-2.0453 nay	-0.0920
+-2.3545 ngafy	-0.1787
+-2.0453 nhaajt	-0.1747
+-1.4433 nhajc	-0.0450
+-2.3545 nhieeu	-0.1787
+-2.3545 oanh	-0.0943
+-1.6474 phast	-0.1306
+-2.3545 phust	-0.0943
+-2.0453 quajt	-0.2412
+-1.8692 ser	-0.1586
+-2.3545 suownsg	-0.0943
+-2.3545 taast	-0.1787
+-1.8692 tawst	-0.1565
+-2.3545 thao	-0.0943
+-2.3545 thasi	-0.0943
+-2.3545 theem	-0.1787
+-2.3545 theer	-0.1787
+-2.3545 thees	-0.1787
+-2.3545 theo	-0.0943
+-2.3545 thieest	-0.1787
+-2.0453 thoong	-0.3176
+-1.8692 thowfi	-0.2670
+-2.3545 thu	-0.1787
+-2.3545 thuw	-0.0943
+-2.3545 thuwsc	-0.1787
+-1.7443 tieen	-0.2316
+-2.3545 tieesp	-0.1787
+-2.0453 tieest	-0.0895
+-1.6474 tin	-0.3710
+-2.3545 trai	-0.1787
+-2.3545 trajng	-0.1787
+-2.0453 trifnh	-0.1747
+-2.3545 tuoori	-0.0943
+-2.3545 tuwj	-0.1787
+-1.8692 tuwsc	-0.0896
+-2.3545 veef	-0.1787
+-2.3545 vieejc	-0.1787
+-2.3545 vy	-0.1787
+-2.0453 xax	-0.3236
 
 \2-grams:
--0.0170 </s> <s> 0.0196
--1.7434 <s> baajt 0.1136
--0.9379 <s> bajt 0.1136
--1.7434 <s> bi 0.1136
--2.3270 <s> camera 0.1136
--1.7434 <s> cos 0.1136
--2.3270 <s> giarm 0.1136
--1.7434 <s> hoojp 0.1136
--1.7434 <s> khoong 0.1136
--1.7434 <s> majng 0.1136
--1.7434 <s> nhawc 0.1136
--1.7434 <s> sajc 0.1136
--2.3270 <s> tawng 0.1136
--0.8129 <s> tawst 0.1136
--2.3270 <s> thowfi 0.1136
--1.7434 <s> tin 0.1136
--2.3270 <s> trajng -0.0085
--0.3285 asnh sasng -0.0878
--0.3285 baajt ddefn 0.6165
--0.8056 bajt masy -0.1342
--0.8056 bajt nhajc -0.1342
--0.8056 bajt quajt -0.1342
--0.3285 bi </s> 1.2533
--0.6295 camera sau 0.1136
--0.6295 camera truowc 0.1136
--0.3285 coorng </s> 1.2533
--0.3285 cos </s> 1.2533
--0.0792 ddefn </s> 0.7160
--0.3285 ddieejn thoaji 0.1136
--0.8056 ddooj </s> 1.2533
--1.3892 ddooj sasng -0.0179
--0.3285 gian </s> 1.2533
--0.6295 giarm ddooj -0.1436
--0.6295 giarm nhieejt -0.1342
--0.3285 hafnh </s> 1.2533
--0.3285 hooji </s> 1.2533
--0.3285 hoojp thuw 0.1136
--0.3285 khoong </s> 1.2533
--1.2131 lajnh </s> 1.3790
--0.3285 majng xax 0.1136
--1.2131 masy lajnh -0.0085
--1.2131 nhajc </s> 1.3790
--0.3285 nhawc nhowr 0.1136
--1.2131 nhieejt ddooj 0.0379
--0.3285 nhowr </s> 1.2533
--1.2131 quajt </s> 1.3790
--0.3285 sajc ddieejn 0.1136
--0.8056 sasng </s> 1.2533
--1.3892 sasng ddefn 0.7422
--0.3285 sau </s> 1.2533
--0.6295 tawng ddooj -0.1436
--0.6295 tawng nhieejt -0.1342
--0.9305 tawst ddefn 0.6165
--0.9305 tawst masy -0.1342
--0.9305 tawst nhajc -0.1342
--0.9305 tawst quajt -0.1342
--0.6295 thasi asnh 0.1136
--0.6295 thasi vaajn 0.1136
--0.3285 thoaji </s> 1.2533
--0.6295 thowfi gian 0.1136
--0.6295 thowfi tieest 0.1136
--0.3285 thuw </s> 1.2533
--0.3285 tieest </s> 1.2533
--0.3285 tin tuwsc 0.1136
--1.2131 trajng thasi 0.1136
--0.3285 truowc coorng 0.1136
--0.3285 tuwsc </s> 1.2533
--0.3285 vaajn hafnh 0.1136
--0.3285 xax hooji 0.1136
+-0.0107 </s> <s> 0.0812
+-1.2608 <s> baajt 0.0619
+-2.0810 <s> baay 0.0619
+-1.5681 <s> bi 0.0047
+-1.5878 <s> caajp -0.0907
+-1.2608 <s> chia 0.3158
+-2.0810 <s> chujp 0.0619
+-2.0810 <s> coong 0.0619
+-2.0810 <s> cos 0.0619
+-2.0810 <s> dajt 0.0619
+-1.5878 <s> duwfng 0.0619
+-2.0810 <s> khoong 0.0619
+-1.5878 <s> lijch -0.0907
+-2.0810 <s> lufi 0.0619
+-0.9138 <s> phast -0.0482
+-1.2608 <s> tawst 0.0619
+-2.0810 <s> theem 0.0619
+-1.5878 <s> thoong -0.0907
+-1.2608 <s> thowfi -0.0212
+-2.0810 <s> tieesp 0.0619
+-1.2608 <s> tin -0.0261
+-0.7693 arnh </s> 1.4941
+-0.7693 arnh tuwj 0.0619
+-0.4683 ba muowi 0.0619
+-0.9454 baajt ddefn 0.2088
+-0.9454 baajt nhajc -0.0539
+-0.9454 baajt quajt 0.2088
+-0.4683 baay giowf -0.0664
+-0.4683 bao nhieeu 0.0619
+-0.4683 baso thuwsc 0.0619
+-1.0703 bi </s> 1.4941
+-1.0703 bi bao 0.0619
+-0.5771 bi laf -0.0070
+-0.4683 bij </s> 1.4941
+-0.2761 caajp nhaajt 0.0619
+-0.4683 car </s> 1.4941
+-0.1252 chia ser 0.0619
+-0.4683 chujp arnh -0.0377
+-0.4683 chus </s> 1.4941
+-0.7693 con gasi 0.0619
+-0.7693 con trai 0.0619
+-0.4683 coong vieejc 0.0619
+-0.4683 cos </s> 1.4941
+-1.0703 cuar thu 0.0619
+-0.5771 cuar tieen -0.2846
+-1.0703 cuar vy 0.0619
+-0.4683 dajt baso 0.0619
+-0.2761 ddefn </s> 1.1946
+-0.7693 duwfng laji 0.2088
+-0.7693 duwfng nhajc -0.0539
+-0.4683 gasi </s> 1.4941
+-0.4683 ghi chus 0.0619
+-0.4683 gian </s> 1.4941
+-0.4683 gif </s> 1.4941
+-0.9454 giowf </s> 1.4941
+-0.9454 giowf ba 0.0619
+-0.9454 giowf laf -0.0664
+-0.4683 hay con -0.0377
+-0.4683 hojc </s> 1.4941
+-0.2761 hooji </s> 1.1946
+-0.4683 hoojp thuw 0.0619
+-0.2761 hoom nay 0.0619
+-0.4683 khoa hojc 0.0619
+-0.4683 khoong </s> 1.4941
+-0.9454 laf con -0.0377
+-0.9454 laf gif 0.0619
+-0.9454 laf maasy 0.0619
+-0.2761 laji </s> 1.1946
+-0.2761 lijch trifnh 0.0619
+-0.4683 lufi laji 0.2088
+-0.4683 lusc muowfi 0.0619
+-0.4683 maasy giowf -0.0664
+-0.4683 mai </s> 1.4941
+-0.2761 majng xax -0.0907
+-0.4683 minh </s> 1.4941
+-0.4683 moojt giowf -0.0664
+-0.4683 muowfi moojt 0.0619
+-0.4683 muowi phust 0.0619
+-0.4683 nafo </s> 1.4941
+-0.7693 nay </s> 1.4941
+-0.7693 nay thees 0.0619
+-0.4683 ngafy mai 0.0619
+-0.7693 nhaajt hoojp 0.0619
+-0.7693 nhaajt majng 0.2088
+-0.8585 nhajc </s> 1.3942
+-0.8585 nhajc cuar 0.0047
+-0.4683 nhieeu tuoori 0.0619
+-0.4683 oanh </s> 1.4941
+-0.6543 phast nhajc -0.1539
+-1.1672 phast taast 0.0619
+-0.4683 phust </s> 1.4941
+-0.2761 quajt </s> 1.1946
+-0.9454 ser arnh -0.0377
+-0.9454 ser nhajc -0.0539
+-0.9454 ser trajng 0.0619
+-0.4683 suownsg </s> 1.4941
+-0.4683 taast car 0.0619
+-0.9454 tawst ddefn 0.2088
+-0.9454 tawst nhajc -0.0539
+-0.9454 tawst quajt 0.2088
+-0.4683 thao </s> 1.4941
+-0.4683 thasi </s> 1.4941
+-0.4683 theem ghi 0.0619
+-0.4683 theer thao 0.0619
+-0.4683 thees nafo 0.0619
+-0.4683 theo </s> 1.4941
+-0.4683 thieest bij 0.0619
+-0.2761 thoong tin -0.0552
+-0.9454 thowfi gian 0.0619
+-0.4522 thowfi tieest 0.0619
+-0.4683 thu minh 0.0619
+-0.4683 thuw </s> 1.4941
+-0.4683 thuwsc lusc 0.0619
+-0.5771 tieen </s> 1.1946
+-0.5771 tieen tieen -0.2846
+-0.4683 tieesp theo 0.0619
+-0.7693 tieest </s> 1.4941
+-0.7693 tieest hoom 0.2088
+-1.1672 tin majng 0.2088
+-0.3470 tin tuwsc 0.0619
+-1.1672 tin veef 0.0619
+-0.4683 trai hay 0.0619
+-0.4683 trajng thasi 0.0619
+-0.7693 trifnh hoom 0.2088
+-0.7693 trifnh ngafy 0.0619
+-0.4683 tuoori </s> 1.4941
+-0.4683 tuwj suownsg 0.0619
+-0.9454 tuwsc </s> 1.4941
+-0.9454 tuwsc khoa 0.0619
+-0.9454 tuwsc theer 0.0619
+-0.4683 veef thieest 0.0619
+-0.4683 vieejc hawfng -0.1168
+-0.4683 vy oanh 0.0619
+-0.2761 xax hooji -0.0907
 
 \3-grams:
--1.9054 </s> <s> baajt 
--0.9208 </s> <s> bajt 
--2.1964 </s> <s> camera 
--1.9054 </s> <s> cos 
--2.1964 </s> <s> giarm 
--1.9054 </s> <s> hoojp 
--1.9054 </s> <s> khoong 
--1.9054 </s> <s> majng 
--1.9054 </s> <s> nhawc 
--1.9054 </s> <s> sajc 
--2.1964 </s> <s> tawng 
--0.7959 </s> <s> tawst 
--2.1964 </s> <s> thowfi 
--1.9054 </s> <s> tin 
--2.1964 </s> <s> trajng 
--0.5075 <s> baajt ddefn 
--0.9846 <s> bajt masy 
--0.9846 <s> bajt nhajc 
--0.9846 <s> bajt quajt 
--0.5075 <s> bi </s> 
--0.8085 <s> camera sau 
--0.8085 <s> camera truowc 
--0.5075 <s> cos </s> 
--0.8085 <s> giarm ddooj 
--0.8085 <s> giarm nhieejt 
--0.5075 <s> hoojp thuw 
--0.5075 <s> khoong </s> 
--0.5075 <s> majng xax 
--0.5075 <s> nhawc nhowr 
--0.5075 <s> sajc ddieejn 
--0.8085 <s> tawng ddooj 
--0.8085 <s> tawng nhieejt 
--1.1096 <s> tawst ddefn 
--1.1096 <s> tawst masy 
--1.1096 <s> tawst nhajc 
--1.1096 <s> tawst quajt 
--0.8085 <s> thowfi gian 
--0.8085 <s> thowfi tieest 
--0.5075 <s> tin tuwsc 
--1.0995 <s> trajng thasi 
--0.5075 asnh sasng </s> 
--0.5075 baajt ddefn </s> 
--0.5075 bajt masy lajnh 
--0.5075 bajt nhajc </s> 
--0.5075 bajt quajt </s> 
--0.5075 bi </s> <s> 
--0.5075 camera sau </s> 
--0.5075 camera truowc coorng 
--0.5075 coorng </s> <s> 
--0.5075 cos </s> <s> 
--0.0969 ddefn </s> <s> 
--0.5075 ddieejn thoaji </s> 
--0.5075 ddooj </s> <s> 
--1.0995 ddooj sasng ddefn 
--0.5075 gian </s> <s> 
--0.5075 giarm ddooj sasng 
--0.5075 giarm nhieejt ddooj 
--0.5075 hafnh </s> <s> 
--0.5075 hooji </s> <s> 
--0.5075 hoojp thuw </s> 
--0.5075 khoong </s> <s> 
--1.0995 lajnh </s> <s> 
--0.5075 majng xax hooji 
--1.0995 masy lajnh </s> 
--1.0995 nhajc </s> <s> 
--0.5075 nhawc nhowr </s> 
--1.0995 nhieejt ddooj </s> 
--0.5075 nhowr </s> <s> 
--1.0995 quajt </s> <s> 
--0.5075 sajc ddieejn thoaji 
--0.5075 sasng </s> <s> 
--1.0995 sasng ddefn </s> 
--0.5075 sau </s> <s> 
--0.5075 tawng ddooj sasng 
--0.5075 tawng nhieejt ddooj 
--0.5075 tawst ddefn </s> 
--0.5075 tawst masy lajnh 
--0.5075 tawst nhajc </s> 
--0.5075 tawst quajt </s> 
--0.5075 thasi asnh sasng 
--0.5075 thasi vaajn hafnh 
--0.5075 thoaji </s> <s> 
--0.5075 thowfi gian </s> 
--0.5075 thowfi tieest </s> 
--0.5075 thuw </s> <s> 
--0.5075 tieest </s> <s> 
--0.5075 tin tuwsc </s> 
--0.8085 trajng thasi asnh 
--0.8085 trajng thasi vaajn 
--0.5075 truowc coorng </s> 
--0.5075 tuwsc </s> <s> 
--0.5075 vaajn hafnh </s> 
--0.5075 xax hooji </s> 
+-1.4420 </s> <s> baajt 
+-2.2234 </s> <s> baay 
+-1.4420 </s> <s> bi 
+-1.5099 </s> <s> caajp 
+-1.4420 </s> <s> chia 
+-2.2234 </s> <s> chujp 
+-2.2234 </s> <s> coong 
+-2.2234 </s> <s> cos 
+-2.2234 </s> <s> dajt 
+-1.5099 </s> <s> duwfng 
+-2.2234 </s> <s> khoong 
+-1.5099 </s> <s> lijch 
+-2.2234 </s> <s> lufi 
+-0.9031 </s> <s> phast 
+-1.4420 </s> <s> tawst 
+-2.2234 </s> <s> theem 
+-1.5099 </s> <s> thoong 
+-1.4420 </s> <s> thowfi 
+-2.2234 </s> <s> tieesp 
+-1.4420 </s> <s> tin 
+-1.0985 <s> baajt ddefn 
+-1.0985 <s> baajt nhajc 
+-1.0985 <s> baajt quajt 
+-0.6214 <s> baay giowf 
+-1.2234 <s> bi </s> 
+-1.2234 <s> bi bao 
+-0.5099 <s> bi laf 
+-0.2088 <s> caajp nhaajt 
+-0.3171 <s> chia ser 
+-0.6214 <s> chujp arnh 
+-0.6214 <s> coong vieejc 
+-0.6214 <s> cos </s> 
+-0.6214 <s> dajt baso 
+-0.9224 <s> duwfng laji 
+-0.9224 <s> duwfng nhajc 
+-0.6214 <s> khoong </s> 
+-0.2088 <s> lijch trifnh 
+-0.6214 <s> lufi laji 
+-0.4997 <s> phast nhajc 
+-1.3203 <s> phast taast 
+-1.0985 <s> tawst ddefn 
+-1.0985 <s> tawst nhajc 
+-1.0985 <s> tawst quajt 
+-0.6214 <s> theem ghi 
+-0.2088 <s> thoong tin 
+-1.0985 <s> thowfi gian 
+-0.3849 <s> thowfi tieest 
+-0.6214 <s> tieesp theo 
+-0.3171 <s> tin tuwsc 
+-0.6214 arnh </s> <s> 
+-0.6214 arnh tuwj suownsg 
+-0.6214 ba muowi phust 
+-0.6214 baajt ddefn </s> 
+-0.6214 baajt nhajc </s> 
+-0.6214 baajt quajt </s> 
+-0.6214 baay giowf laf 
+-0.6214 bao nhieeu tuoori 
+-0.6214 baso thuwsc lusc 
+-0.6214 bi </s> <s> 
+-0.6214 bi bao nhieeu 
+-0.9224 bi laf con 
+-0.9224 bi laf gif 
+-0.6214 bij </s> <s> 
+-0.9224 caajp nhaajt hoojp 
+-0.9224 caajp nhaajt majng 
+-0.6214 car </s> <s> 
+-1.0985 chia ser arnh 
+-1.0985 chia ser nhajc 
+-1.0985 chia ser trajng 
+-0.6214 chujp arnh tuwj 
+-0.6214 chus </s> <s> 
+-0.6214 con gasi </s> 
+-0.6214 con trai hay 
+-0.6214 coong vieejc hawfng 
+-0.6214 cos </s> <s> 
+-0.6214 cuar thu minh 
+-0.2088 cuar tieen tieen 
+-0.6214 cuar vy oanh 
+-0.6214 dajt baso thuwsc 
+-0.2088 ddefn </s> <s> 
+-0.6214 duwfng laji </s> 
+-0.6214 duwfng nhajc </s> 
+-0.6214 gasi </s> <s> 
+-0.6214 ghi chus </s> 
+-0.6214 gian </s> <s> 
+-0.6214 gif </s> <s> 
+-0.6214 giowf </s> <s> 
+-0.6214 giowf ba muowi 
+-0.6214 giowf laf maasy 
+-0.6214 hay con gasi 
+-0.6214 hojc </s> <s> 
+-0.2088 hooji </s> <s> 
+-0.6214 hoojp thuw </s> 
+-0.9224 hoom nay </s> 
+-0.9224 hoom nay thees 
+-0.6214 khoa hojc </s> 
+-0.6214 khoong </s> <s> 
+-0.6214 laf con trai 
+-0.6214 laf gif </s> 
+-0.6214 laf maasy giowf 
+-0.2088 laji </s> <s> 
+-0.9224 lijch trifnh hoom 
+-0.9224 lijch trifnh ngafy 
+-0.6214 lufi laji </s> 
+-0.6214 lusc muowfi moojt 
+-0.6214 maasy giowf </s> 
+-0.6214 mai </s> <s> 
+-0.2088 majng xax hooji 
+-0.6214 minh </s> <s> 
+-0.6214 moojt giowf ba 
+-0.6214 muowfi moojt giowf 
+-0.6214 muowi phust </s> 
+-0.6214 nafo </s> <s> 
+-0.6214 nay </s> <s> 
+-0.6214 nay thees nafo 
+-0.6214 ngafy mai </s> 
+-0.6214 nhaajt hoojp thuw 
+-0.6214 nhaajt majng xax 
+-0.4028 nhajc </s> <s> 
+-1.2234 nhajc cuar thu 
+-0.5099 nhajc cuar tieen 
+-1.2234 nhajc cuar vy 
+-0.6214 nhieeu tuoori </s> 
+-0.6214 oanh </s> <s> 
+-0.4028 phast nhajc cuar 
+-0.6214 phast taast car 
+-0.6214 phust </s> <s> 
+-0.2088 quajt </s> <s> 
+-0.6214 ser arnh </s> 
+-0.6214 ser nhajc </s> 
+-0.6214 ser trajng thasi 
+-0.6214 suownsg </s> <s> 
+-0.6214 taast car </s> 
+-0.6214 tawst ddefn </s> 
+-0.6214 tawst nhajc </s> 
+-0.6214 tawst quajt </s> 
+-0.6214 thao </s> <s> 
+-0.6214 thasi </s> <s> 
+-0.6214 theem ghi chus 
+-0.6214 theer thao </s> 
+-0.6214 thees nafo </s> 
+-0.6214 theo </s> <s> 
+-0.6214 thieest bij </s> 
+-0.9224 thoong tin majng 
+-0.9224 thoong tin veef 
+-0.6214 thowfi gian </s> 
+-0.9224 thowfi tieest </s> 
+-0.9224 thowfi tieest hoom 
+-0.6214 thu minh </s> 
+-0.6214 thuw </s> <s> 
+-0.6214 thuwsc lusc muowfi 
+-0.2088 tieen </s> <s> 
+-0.2088 tieen tieen </s> 
+-0.6214 tieesp theo </s> 
+-0.6214 tieest </s> <s> 
+-0.6214 tieest hoom nay 
+-0.6214 tin majng xax 
+-1.0985 tin tuwsc </s> 
+-1.0985 tin tuwsc khoa 
+-1.0985 tin tuwsc theer 
+-0.6214 tin veef thieest 
+-0.6214 trai hay con 
+-0.6214 trajng thasi </s> 
+-0.6214 trifnh hoom nay 
+-0.6214 trifnh ngafy mai 
+-0.6214 tuoori </s> <s> 
+-0.6214 tuwj suownsg </s> 
+-0.6214 tuwsc </s> <s> 
+-0.6214 tuwsc khoa hojc 
+-0.6214 tuwsc theer thao 
+-0.6214 veef thieest bij 
+-0.6214 vieejc hawfng ngafy 
+-0.6214 vy oanh </s> 
+-0.2088 xax hooji </s> 
 
 \end\

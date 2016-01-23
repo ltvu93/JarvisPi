@@ -2,10 +2,11 @@
 import time
 import re
 import threading
+from core import tts
 from datetime import datetime
 
 def set_alarm(mic, hour, minute):
-    mic.speak("ĐẶT BÁO THỨC ")
+    tts.speak_wav("dat_bao_thuc_thanh_cong.wav", )
     while True:
         currentHour = datetime.now().hour
         currentMinute = datetime.now().minute
@@ -31,14 +32,14 @@ def handle(mic, command, profile):
             hour = matchObj.group(1).encode("utf-8")
             minute = 0
         else:
-            mic.speak("Thời gian bạn đặt chưa đúng")
+            tts.speak_wav("thoi_gian_ban_dat_chua_dung.wav")
             return
 
     currentHour = datetime.now().hour
     currentMinute = datetime.now().minute
 
     if hour < currentHour or (hour == currentHour and minute < currentMinute):
-        mic.speak("Thời gian bạn đặt chưa đúng")
+        tts.speak_wav("thoi_gian_ban_dat_chua_dung.wav")
         return
 
     try:

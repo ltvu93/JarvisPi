@@ -1,6 +1,8 @@
 # coding: utf-8
 import re
 
+#dict = {"MỘT": "1.wav", "HAI": "2.wav", "BA":"3.wav", "BỐN":"4.wav", "NĂM":"5.wav", "SÁU":"6.wav", "BẢY":"7.wav", "TÁM":"8.wav", "CHÍN":"9.wav", "MƯỜI": "10.wav", "MỐT": "mot.wav", "LĂM":"lam.wav", "MƯƠI":"muoi.wav"}
+
 def text_to_num_1(text):
 	if text == "KHÔNG":
 		return 0
@@ -75,12 +77,12 @@ def num_to_text_2(num):
 		d = num / 10
 		u = num % 10
 		if d == 1:
-			if u != 5:
-				return " MƯỜI " + num_to_text_1(u)
+			if u == 5:
+				return " MƯỜI LĂM "
 			elif u == 0:
 				return " MƯỜI "
 			else:
-				return " MƯỜI LĂM "
+				return " MƯỜI " + num_to_text_1(u)
 		else:
 			if u == 1:
 				return num_to_text_1(d) + " MƯƠI MỐT"
@@ -144,3 +146,61 @@ def find_num_and_replace(string):
                 result = result.replace(str(number[i]), str(num_to_text(int(number[i]))))
                 i += 1
         return result
+        
+def find_wav_from_number_1(num):
+	result = []
+	if num == 0:
+		return "0.wav"
+	elif num == 1:
+		return "1.wav"
+	elif num == 2:
+		return "2.wav"
+	elif num == 3:
+		return "3.wav"
+	elif num == 4:
+		return "4.wav"
+	elif num == 5:
+		return "5.wav"
+	elif num == 6:
+		return "6.wav"
+	elif num == 7:
+		return "7.wav"
+	elif num == 8:
+		return "8.wav"
+	elif num == 9:
+		return "9.wav"
+	
+		
+def find_wav_from_number(num):
+	result = []
+	if num < 10:
+		result.append(find_wav_from_number_1(num))
+	elif num < 100 and num >= 10:
+		d = num / 10
+		u = num % 10
+		if d == 1:
+			if u == 5:
+				result.append("10.wav")
+				result.append("lam.wav")
+			elif u == 0:
+				result.append("10.wav")
+			else:
+				result.append("10.wav")
+				result.append(find_wav_from_number_1(u))
+		else:
+			if u == 1:
+				result.append(find_wav_from_number_1(d))
+				result.append("muoi.wav")
+				result.append("mot.wav")
+			elif u == 5:
+				result.append(find_wav_from_number_1(d))
+				result.append("muoi.wav")
+				result.append("lam.wav")
+			elif u == 0:
+				result.append(find_wav_from_number_1(d))
+				result.append("muoi.wav")
+			else:
+				result.append(find_wav_from_number_1(d))
+				result.append("muoi.wav")
+				result.append(find_wav_from_number_1(u))
+	return result

@@ -6,7 +6,7 @@ import audioop    # interact with raw data audio, get RMS
 import time
 import apppath
 import tts
-import converter
+import utils
 from signal import Signal
 
 # Microphone stream config.
@@ -23,14 +23,15 @@ class Mic():
 	self.signal = Signal(24)
 	#choose TTS here
         self.speaker = tts.OnlineTTS()
+        tts.speak_wav("san_sang_nghe_lenh.wav")
         
 
     def get_signal(self):
         return self.signal
 
     def speak(self, phrase):
-        print converter.find_num_and_replace(phrase)
-        self.speaker.speak(converter.find_num_and_replace(phrase))
+        print utils.find_num_and_replace(phrase)
+        self.speaker.speak(utils.find_num_and_replace(phrase))
 
     def play_wav(self, filename):
         self.speaker.speak_wav(apppath.get_resources(filename))
@@ -177,7 +178,7 @@ class Mic():
         THRESHOLD = self.fetchThreshold()
         if SAYYES:
             
-            tts.speak(apppath.get_resources('yes.wav'))
+            tts.speak_wav('yes.wav')
         else:
             self.signal.stop_blink()
         
@@ -217,6 +218,7 @@ class Mic():
             f.seek(0)
             
             transcrips = self.active_stt.get_value(f)
-            self.speaker.speak_wav(apppath.get_resources('beep.wav'))
+            #self.speaker.speak_wav(apppath.get_resources('beep.wav'))
+            tts.speak_wav('beep.wav')
             self.signal.turn_off()
             return transcrips
